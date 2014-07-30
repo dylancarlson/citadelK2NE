@@ -1,0 +1,156 @@
+/*
+ * PARAMS.TXT
+ *
+ *     Date:  24 November 1991
+ * Audience:  Citadel:K2NE Sysops and wannabes
+ *  Purpose:  A description of each of the command-line paramaters
+ *            usable with CTDL.EXE as distributed by K2NE Software
+ *            in connection with the Citadel:K2NE Bulletin Board
+ *            software.  Citadel:K2NE is a PUBLIC DOMAIN release.
+ */
+
+Parameter     Effect
+--------------------
+asdoor
+              Tells Citadel that it is being run "as a Door" from
+              another program.  Behavior is, at best, unpredictable.
+
+bink
+              Tells Citadel that it has been called from a "front-end"
+              such as BinkleyTerm.  When this parameter is used, the
+              modem initialization routines are completely bypassed,
+              and when the caller logs out, control is passed back to
+              the supervisory batchfile with an exit-level of 0.  It is
+              up to you to construct your batchfile(s) to properly handle
+              this.
+
+lock
+              Using this parameter will cause Citadel to ask for "Username"
+              instead of bringing the caller to the "BaseRoom>" prompt
+              when carrier is detected.  When this parameter is used,
+              the caller is prompted for name, then password, and if
+              the process fails, the caller is asked if he wants to apply
+              for an account.  After the number of attempts at logging
+              in specified by the #LOGTRY parameter (in CTDLCNFG.SYS) are
+              exceeded, Citadel will hang-up on the caller.
+
+private
+              Same as "lock" however the caller is not given the option
+              of applying for a new account.  This is for systems where
+              tight security is desired.  Accounts must be "pre-created"
+              by the sysop at the console.
+
+netonly
+              Brings up Citadel to ONLY accept an incoming call if it
+              is a networking call.  Sends a "We are in networking" type
+              of message to "human" callers.
+
+noluck=n
+             The number specified by n is the numeric code that your
+              modem returns when you call out and get a BUSY signal.
+              Most "Hayes-type" modems return a 7 in that case.  This is
+              used during networking.
+
+doormin=n
+              The number specified by n is the number of minutes that your
+              callers are permitted to spend in any given "door" program.
+              This is NOT a "session limit" for doors.  Note, if this
+              parameter is missing DOORS WILL NOT WORK.  Also, minimum
+              value is 10.
+
+rings=n
+              The value of n is the number of rings before Citadel will
+              tell your modem to answer the line.  If this parameter is
+              not used, then your modem MUST be capable of ring-counting
+              and auto-answering on its own.  If you use this parameter,
+              then you should tell your modem to ignore rings by using
+              the appropriate modem command (ATS0=0 for Hayes) in the
+              #modemSetup command (CTDLCNFG.SYS).
+
+dead=x,y
+              This controls the AnytimeNet dial-out timeframes. The
+              value of x determines how long Citadel will wait between
+              calls before attempting an AnytimeNet session.  The value
+              of y determines the length of the session.  Both values
+              are in minutes.
+
+color=x,y
+              This sets up the colors for the text and screen at Console
+              when #ANSICONSOLE is set to 0 in CTDLCNFG.SYS.  Note that
+              this option MAY not be available beginning with release
+              version 6.02 or newer.
+
+coltb=a,b,c,d,e
+              Param "coltb=a,b,c,d" added to control ANSI color assignment.
+              The assignment levels are (roughly) as follows:
+                a: message texts, system announcements and major (non-room)
+                   prompts particularly for nonexpert users, one of the
+                   introductory (optional logtext.00#) files
+                b: the console standby screen (FKEYS.BLB), mail> notification
+                   at login, display of rooms with new messages, expanded
+                   descriptions in file directories, message headers, most
+                   of the help files, room prompts for mail> and aide>,
+                   known hidden rooms.
+                c: HELPOPT.HLP when called by ".h?", terse file directory
+                   listings, all room prompts except for mail> and aide>,
+                   list of known directory rooms (.kd), nodes on the net (.m),
+                   known public rooms, rooms with no new messages.
+                d: Known zapped/forgotten rooms.
+                e: Color of FKEYS.BLB (if present)
+              Experiment here to find something that looks good on your
+              monitor.  Usage is as follows:
+
+              The letters (a, b, c, and d) should be replaced with SINGLE DIGIT
+              numbers in accordance with the following color-code assignment:
+                       0=BLACK     1=RED        2=GREEN    3=BROWN
+                       4=BLUE      5=MAGENTA    6=CYAN     7=WHITE
+              These are the ONLY permissable values for this parameter.
+              A typical example use of the parameter might be "coltb=2,1,4,5,2",
+              which is, incidentally, the DEFAULT setting if you leave this
+              parameter out.  This parameter controls the colors you, as well
+              as the modem user, will see (provided you use the #ANSICONSOLE
+              value of 1 (in CTDLCNFG.SYS) to activate ANSI color for your console
+              and provided, obviously, that the caller has set his ANSI flag ON
+              using the ".ECG" command in his user configuration).
+
+altlink=name
+              String used as "name" will be placed into the NameField of a
+              message integrated from an alternate network.  See notes
+              that accompany CITAGATE for more details.  This should NEVER
+              be used as a parameter in your normal operation, but ONLY
+              in conjunction with the CITAGATE utility.
+
+noringer
+              Turns off the computer speaker sound-effect when the modem
+              line rings.
+
+nonoise
+              Turns off the "exploding windows" sound effects.
+
++noinit
+              Brings up Citadel normally but WITHOUT modem initialization.
+              Assumes a user is already online.  This is usually used
+              after a user returns from a "door."
+
++doors
+              Same as "+noinit" BUT forces Citadel to a special exitlevel
+              (ERRORLEVEL 8) so that you can use an external program to
+              reboot your machine.  This was used with earlier versions
+              of Citadel (pre-FOSSIL) that had a problem hanging up the
+              phone properly after some doors were used.  You should not
+              have to use this with V6.01 or newer, but it is available
+              "just in case."
+
++recover
+              Using this parameter will cause Citadel to generate a message
+              into the Aide> room stating that the system crashed and that
+              the date/time of the message was the date/time of the crash.
+              See the sample RUNBBS.BAT file that comes with the full release
+              filesets for an example of how to use this.
+
+CAUTION:  You should use ONLY the BARE MINIMUM number of parameters to support
+          your use of the BBS.  Remember that DOS places a limit on the
+          length of a command-line, and also that strange things happen
+          with more than nine parameters.  You can use more than nine, but
+          you first had best be an expert in the use of the BATCH "shift"
+          command.

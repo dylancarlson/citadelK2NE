@@ -1,0 +1,88 @@
+91Aug16  Released Version 5.20.  (VAQ)
+91Aug25  Removed built-in terminal code and manual-dialer options.
+         This was done because this feature was suffering from
+         general disuse - if folks need a terminal they certainly
+         can do better than to use Citadel - plus it saves space!  (VAQ)
+91Sep03  Abbreviated display for the ".RS" command.  Removed some
+         information that is really superfluous.  (VAQ)
+91Oct12  Began work on adding FOSSIL compatibility for all Citadel
+         modem I/O routines.  Each Citadel:K2NE sysop will have to
+         obtain his/her FOSSIL independently.  According to all
+         available documentation, "all FOSSILs are created (essentially)
+         equally" so it **shouldn't** matter which one is used.  However,
+         this stuff was all tested using X00.SYS (Gwinn FOSSIL driver),
+         so I can only "vouch" for that one!  (VAQ)
+91Oct17  Work completed on all FOSSIL routines.  Module LIBFOSSL.C
+         added to the CN library for CTDL.EXE and CONFG.EXE.
+         Function "interpret()" has been removed from Citadel since
+         it is now completely superfluous.  The FOSSIL now handles
+         ALL modem control and I/O functions.  (VAQ)
+91Oct17  Modified Configurator to take #modemSetup and write it out
+         to INITLINE.SYS, and modified Citadel to look for INITLINE.SYS
+         at boot-time and grab the modem initialization string from it.
+         Configurator version bumped to 11.  Citadel:K2NE version
+         major-release series bumped to 6.  Beginning with Version 6.01,
+         the new (Version 11.1) configurator will be REQUIRED.
+         All "mini-interpreter" routines in CTDLCNFG.SYS should be
+         either removed or disabled (by indenting a space) except for
+         the "#alldone" line.  Configurator (V11.1) will check for
+         existence of an active FOSSIL driver and will NOT permit
+         Citadel to be configured until a FOSSIL is properly installed.
+
+         NOTE:  The presence of a "#modemSetup" line in CTDLCNFG.SYS is
+                absolutely essential.  If it is not there, you still will
+                get a "Must have either #modemSetup or #INIT_PORT" note,
+                and the configurator will bomb.  DO NOT USE #INIT_PORT.
+                Citadel:K2NE now ignores it, will not look for it, and you
+                will (subsequently) NOT generate an INITLINE.SYS file
+                unless you have a "#modemSetup" specified.  The FOSSIL
+                will be properly pointed at the COMport you specify with
+                your #COM setting, and your modem will reset between
+                calls (and between net calls and net sessions) at the
+                baud-rate you specify in #SYSBAUD.  DO NOT ATTEMPT TO
+                MANUALLY EDIT "INITLINE.SYS" - let the Configurator
+                do it for you!
+
+         NOTE:  The stand-alone CITANET.EXE (tm) networker has not yet been
+                updated for FOSSIL compliance.  DO NOT attempt to use
+                any Version 5.xx CITANET (tm) utility.  The CtdlTabl.Sys
+                file used by a V5.xx CitaNet (tm) is NOT compatible with
+                the Citadel:K2NE V6.xx CtdlTabl.Sys and hence, older
+                CITANET.EXE programs will NOT RUN!  A new CitaNet (tm)
+                utility will be released in the near future.  (VAQ)
+
+                ("CitaNet" and "CITANET.EXE" are registered trademarks
+                  of Vince Quaresima t/a K2NE Software.  All rights are
+                  reserved!)
+91Oct20  Added optional configuration variable "#modemReset" for those who
+         need a bit more than "AT" sent to the modem as a "prod" after each
+         online session.  Syntax (in CTDLCNFG.SYS) is:
+
+         #modemReset "AT etc etc etc etc"
+
+         Assuming a Hayes command-set compatible modem, the string should
+         start off with "AT".  What follows can be anything you determine
+         that your modem should be "told" in order to reset it.  If this
+         parameter is not used in CTDLCNFG.SYS, then Citadel will assume
+         a reset-string of "AT" and will send this to your modem immediately
+         after dropping DTR at the end of each online session.  This should
+         hopefully make sure that your modem resets to your SysBaud value
+         in between each use.  (VAQ)
+91Oct20  Added optional configuration variable "#DTR-DELAY" for those who
+         have modems which need a bit extra time to drop carrier when
+         DTR is pulled down.  If your modem seems to be having problems
+         resetting at the end of a call or between nodes during networking,
+         try adding "#DTR-DELAY n" to your CTDLCNFG.SYS file
+         (where n is any integer).  For example, "#DTR-DELAY 1" will add
+         about 20 milliseconds to the time the system will wait after pulling
+         DTR.  "2" would add about 40 milliseconds, "3" about 60 milliseconds,
+         and so forth. (VAQ)
+91Oct22  Added routines to handle the RTS flag of the Modem Control
+         Register -- this may not be important to all systems under all
+         conditions but it is recommended in the FOSSIL standard and won't
+         hurt anything.  Thanks to John Luce for the idea and for his
+         assistance in writing this code.  (VAQ)
+91Oct23  Removed the "User Information" facility.  General feedback has been
+         that this feature was vastly ignored.  It took up a lot of code
+         space that can be put to other uses.  (VAQ)
+91Oct28  Released V6.01  (VAQ)

@@ -1,0 +1,53 @@
+93Apr03  Version 6.05 released.  (VAQ, SMW, MAB)
+93Apr07  Work opened on V6.06.  (VAQ, SMW)
+93Apr08  Telnet session and user now displays on console
+         status line.  (VAQ, SMW)
+93Apr08  "#" command added - prompts user as to how many messages
+         the user wants to read, then reads starting at that many
+         messages "back" from the newest message in a room.  (VAQ, SMW)
+93Apr08  Removed ".rm" command - the "#" command makes it
+         rather superfluous, redundant and tautological.  (VAQ, SMW)
+93Apr08  Telnet sessions now support ANSI codes passed through from
+         remote host to online user.  (VAQ, SMW)
+93Apr10  In Mail>, "broadcast messages" to "Citadel" will now display
+         as being "to All System Users" when read by their recipients.
+         There is no change concerning who may enter such messages.  (VAQ)
+93Apr10  Removed ".<A>ide <I>nsert-msg" as an available command.
+         Everything it does can be done through other Aide commands
+         so "out it goes."  (VAQ, SMW)
+93Apr10  List of users for .<R>ead <I>nvited now displays in columnized
+         format keyed to logged-in Aide's terminal width variable.  (VAQ)
+93Apr14  New users are now asked to provide real name, address, city,
+         state, ZIPcode and phone number at first login.  This is stored
+         to file CTDLUSER.# where # is the user's log-slot number assigned
+         by Citadel during the initial login process.  This information
+         can be flagged by the user as PUBLIC or PRIVATE.  If PUBLIC,
+         the information is displayed to any user doing a ".U" profile
+         request.  (VAQ, SMW)
+
+         REQUIRED UTILITY UPDATE: UserBio.Exe dated 93Apr14 or later.
+
+93Apr14  Users can now add/change their Registration information by
+         using the ".ECR" command sequence.  The user is shown the
+         present information contained in CTDLUSER.# (see previous
+         note) and advised of the Public/Private status of the information.
+         The user is then asked to confirm changing the information, and
+         if so requested, the user is then brought through the information
+         gathering process and a new CTDLUSER.# file is created.  (VAQ, SMW)
+93Apr15  Removed ".eu" command for user entering/changing of PROFILE
+         statements.  Replaced with ".p".  Also added "p" at any room-
+         prompt for reading user PROFILE statements.  ".RU" removed,
+         since it would be silly to have duplication!  (VAQ, SMW)
+93Apr15  Added option to flag network nodes for telnet access.  This is
+         done by automatic question/response when adding a new node,
+         or by "CTRL L, N, E, nodename, T" sequence for pre-existing
+         nodes.  Network nodes that are "telnet accessible" will display
+         with an asterisk immediately before the Country Code in their
+         node ID strings when a nodelist is invoked.  (VAQ, SMW)
+93Apr18  Version 6.06 released.  (VAQ, SMW, MAB)
+
+
+
+
+
+

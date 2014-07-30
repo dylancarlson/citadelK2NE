@@ -1,0 +1,121 @@
+#
+# MAKEFILE
+#  PURPOSE: for Citadel-86 main executables.  Utility makefile is separate.
+#
+#  This makefile is meant for use in automatic compilation of Citadel-86.  Since
+#  this version of Citadel-86 is written in the Turbo C dialect, this makefile
+#  is tailored toward an MS-DOS environment using Turbo C.  However, I've tried
+#  to keep the system dependent code as isolated as is possible in a makefile.
+#  I also believe that I have not violated any of the UNIX makefile rules with
+#  this file, outside of the backslashes necessary for DOS.
+#
+#  All Citadel-specific source files, including the headers, are expected to be
+#  in the current directory; all system (stdio.h, etc.) are expected to be in
+#  the $(INC) directories (or the current directory).
+#
+#  For those of you who like clean, tidy makefiles: Sorry.  It works.  It don't
+#  get in the way.  Good 'nuff fer me.
+#
+
+CC=d:\turbo-c\tcc -ml -d -O -DTWIT -DNO_VIRTUAL_ROOMS -DNO_CRYPT -DVINCE -DIFL -DANSI -DNEWSTANDBY -DUSERINFO
+INC=-I\TURBO-C
+HEADERS=ctdl.h sysdep.h
+
+.c.obj:
+   $(CC) -c $(INC) $<
+
+NORMAL: ctdl.exe
+
+ALL: ctdl.exe confg.exe
+
+#ctdl.exe: ctdl.obj main.obj rooma.obj roomb.obj misc.obj cn.lib modem.obj\
+# log.obj\
+# msg.obj netcall.obj netrcv.obj sysdep2.obj sysdep1.obj netmisc.obj events.obj\
+# floors.obj citvid.obj virt.obj netitl.obj sysarc.obj k2nedoor.obj\
+# k2ne.obj
+
+ctdl.exe: ctdl.obj rooma.obj roomb.obj misc.obj cn.lib modem.obj\
+ log.obj\
+ msg.obj netcall.obj netrcv.obj sysdep2.obj sysdep1.obj netmisc.obj events.obj\
+ floors.obj citvid.obj virt.obj netitl.obj sysarc.obj k2nedoor.obj\
+ k2ne.obj
+
+
+     tlink @gg
+
+#main.obj: $(HEADERS)
+
+ctdl.obj: $(HEADERS)
+
+k2ne.obj: $(HEADERS)
+
+k2nedoor.obj: $(HEADERS)
+
+floors.obj: $(HEADERS)
+
+events.obj: $(HEADERS)
+
+rooma.obj: $(HEADERS)
+
+roomb.obj: $(HEADERS)
+
+misc.obj: $(HEADERS)
+
+modem.obj: $(HEADERS)
+
+log.obj: $(HEADERS)
+
+msg.obj: $(HEADERS)
+
+netcall.obj: $(HEADERS)
+
+netrcv.obj: $(HEADERS)
+
+sysdep2.obj: $(HEADERS)
+
+sysdep1.obj: $(HEADERS)
+
+netmisc.obj: $(HEADERS)
+
+citvid.obj: $(HEADERS) citvid.h
+
+virt.obj: $(HEADERS) ctdlvirt.h
+
+netitl.obj: $(HEADERS)
+
+sysarc.obj: $(HEADERS)
+
+confg.exe: confg.obj confg2.obj syscfg.obj cn.lib
+   tlink @cc
+
+confg.obj: $(HEADERS)
+
+confg2.obj: $(HEADERS)
+
+syscfg.obj: $(HEADERS)
+
+libarch.obj: $(HEADERS)
+
+citzen.obj: citzen.asm
+
+libnet.obj: $(HEADERS)
+
+liblog.obj: $(HEADERS)
+
+libcryp.obj: $(HEADERS)
+
+libroom.obj: $(HEADERS)
+
+libtabl.obj: $(HEADERS)
+
+libmsg.obj: $(HEADERS)
+
+calllog.obj: $(HEADERS)
+
+libfossl.obj: $(HEADERS)
+
+cn.lib: libarch.obj libnet.obj liblog.obj libcryp.obj libroom.obj\
+ libtabl.obj libmsg.obj calllog.obj libfossl.obj
+    del cn.lib
+    tlib /c cn +libarch +libnet +liblog +libcryp +libroom +libtabl +libmsg +calllog +libfossl
+

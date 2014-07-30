@@ -1,0 +1,88 @@
+89Dec10  Modified code used to read the table-of-contents ("TOC") of
+         archived files so that the ".RC" command will now handle files
+         of type LZH, ARC, PAK and ZIP.  Beginning with distribution of
+         this version (5.06), sysops MUST use the new "TOC_READ.COM"
+         utility which accompanies this release.  It must be in the same
+         directory where "IFL.COM" formerly resided.  In keeping with this
+         change, the command sequence ".RHD", which formerly handled the
+         special case of LZH file content reading, is gone.  (VAQ)
+89Dec21  Unlogged caller is now assumed to be using an 80 column terminal.
+         While it may have once been valid to allow for 40 column users
+         prior to login, most folks are gravitating toward machines that
+         use 80 column displays - and besides, once they are logged in
+         they can customize this!  SYSOPS TAKE NOTE - you should remove
+         the "unlog=xx" parameter from your CTDL batch files.  If you
+         don't, then you will get a false "crash message" in your Aide
+         room every time you boot Citadel.  (VAQ)
+89Dec27  Cleaned up and debugged code for LOCK parameter.  See notes in
+         INCREM.007 for complete description of the LOCK parameter.  (VAQ)
+89Dec27  Added PRIVATE parameter.  This has all the attributes of the LOCK
+         parameter plus if used, when a user presses ENTER to attempt
+         to apply for a new account, the system will type
+         PRIVATE.BLB (if present) and then drop carrier.  This is for
+         those sysops whose circumstance dictates the "ultimate
+         siege mode" Citadel.  (VAQ)
+89Dec31  Added code to support "Pause/Enter" while reading messages in
+         all rooms except Mail>.  If a user pauses the display, then
+         presses E to resume, at the end of the current message the user
+         will be brought to the message editor.  After either saving or
+         holding the message, the user will then resume by re-reading the
+         message from which he interrupted the sequence.  During this
+         sequence of events, the user's hold-message buffer acts in a
+         cumulative way, so that the user can "build up" his replies to
+         messages as he goes through the room, "holding" each reply (which
+         will be appended to previously held replies) until he is at the
+         end of the room, or until he saves the message he has been building.
+         In a netted room, the new message will default as a NON-NET message,
+         but the user will get the "Save as networked message <Y/N>?"
+         prompt which will give him the chance to net the message if he
+         so desires.  (VAQ)
+89Dec31  Modified Pause/Enter to break current message immediately
+         rather than waiting until end.  Also, added code for Pause/REVERSE
+         to change direction of message flow while reading.  (VAQ)
+<><><><><><> "Official" release of V5.06 at this point <><><><><><><>
+90Jan06  Removed ".RC" command and replaced it with "V" (View contents...)
+         for reading archived file directories.  Saves keystrokes!  (VAQ)
+90Jan06  Tweaked networker for BinkleyTerm compatibility.  (VAQ)
+90Jan08  System will check for WARNING.BLB immediately after sending the
+         hard-coded message which warns a user that a timed-event will
+         occur in five minutes.  If the user is still online when the
+         pre-emptive event is scheduled to happen, the system will
+         check for SCHEDULE.BLB prior to sending the hard-coded
+         disconnect message.  (VAQ)
+90Jan11  Total cleanup of code handling LOCK and PRIVATE parameters.
+         This should work without problems (finally!).  Also, the
+		 use of LOCK or PRIVATE parameters OVER-RIDES the setting
+         of the LOGINOK switch in CTDLCNFG.SYS.  However, if you
+         have LOGINOK set to 1, a user who logs in WILL be able to
+         create a new account by using .Terminate-Stay and then
+         logging in as a "new" user.  This could also be done by a
+         valid user upon his return from a Door.  If this creates problems
+         down the line, it will be changed to force ".TS" (and the
+         door-handling functions) to cycle to the secure-login code
+         rather than what is presently done.  (VAQ)
+90Jan15  Added parameter NETONLY which allows running the BBS in
+         network-only mode.  Incoming and outgoing net calls will be
+         processed in the usual manner.  Normal callers will be
+         disconnected - system will type-out ONLYNET.BLB if it exists.  (VAQ)
+90Jan15  New command: ".AN" [.Aide Network-trigger].  Only active for
+         Aide-user who knows (and has accessed) the Remote Sysop password.
+         Once invoked, Citadel will attempt an "anytime-net" out-dial
+         session (if work is pending) as soon as the system has "cycled
+         around" after current call termination.  (VAQ)
+90Jan17  Code added to support selective downloading from within ZOO archives.
+         Command sequence is ".RpC[var]" (.read {protocol} compressed/ZOOfile-
+         [files]" which is similar in every way to selective downloading from
+         ARC, PAK, ZIP or LHARC file-archives.  Please note:  selective
+         downloading using a protocol is restricted to BATCH protocols, which
+         is rather dependent on your choice of transfer drivers.  DSZ, for
+         example, only handles this cleanly with YmodemBATCH and Zmodem.  This
+         is not seen as a tremendous handicap since anyone with the
+         sophistication to handle ZOO archives undoubtedly can handle a
+         batch protocol!  In order to activate this facility for your
+         installation, create a file called UNZOO.SYS containing ONE LINE
+         ONLY, and on this line put the name of your "unzoo" utility.  I am
+         using OOZ.EXE, which works just fine for me.  Naturally, UNZOO.SYS
+         goes in the same directory containing DEARC.SYS, UNZIP.SYS and
+         UNLHARC.SYS.  (VAQ)
+<><><><><><> "Official" release of V5.07 at this point <><><><><><><>

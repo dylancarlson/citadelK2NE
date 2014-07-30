@@ -1,0 +1,96 @@
+92Sep12  Released V6.03  (VAQ)
+92Nov06  Began revision series for V6.04  (VAQ)
+93Feb09  Added capability to run a batch-file when entering CONSOLE mode
+         for sysop (or guest user).  When you press ESC to enter CONSOLE
+         mode, Citadel will look for ONLOCAL.BAT and run it if it exists.
+         When you <T>erminate your local console session, Citadel will
+         look for OFFLOCAL.BAT and run it if it exists.  The purpose is
+         to allow you to disable/enable a "watchkit" timer if you are
+         using one.  Here at Jersey Devil, I use WATCHKIT to reboot the
+         hardware if 2 hours go by without a caller, or if the line rings
+         eight times without an answer (indicating that Citadel has gone
+         into lala-land).  Unfortunately, such utilities can't read minds
+         and if I used the system locally and someone was trying to call,
+         on the eighth ring the hardware would reboot with me online.
+         After being sufficiently annoyed by this, I devised this solution.
+         My ONLOCAL.BAT file consists of the following:
+               @echo off
+               WATCH OFF >NUL
+         My OFFLOCAL.BAT file consists of the following:
+               @echo off
+               WATCH TIMER >NUL
+         The ">NUL" directs all screen output to the null device and avoids
+         "messing up" Citadel's screen display.  (VAQ)
+93Feb12  Aides at CONSOLE and remote sysops (with the password) can now
+         edit the BaseRoom ("lobby").  Primarily intended for those
+         sysops who want their BaseRoom to be "read only" or to be a
+         directory room.  NETWORKING of the BaseRoom is NOT ENCOURAGED!  (VAQ)
+93Feb21  Modified archive file contents display interpreter to recognize
+         the latest (v2.04) PkZip releases.  (VAQ)
+93Mar06  Added <B>ack as an option for those users pausing after each
+         for a prompt.  Exact same function as "+/-" but some say it
+         looks nicer, and I agree (thank you Steve Williams!).  (VAQ)
+93Mar06  Modified FOSSIL interface to permit use of modems at 9.6, 14,4 and
+         19.2 kbps.  Opened relevant variables in the CTDLCNFG overlay.
+         Many thanks to Steve Williams ("Patriot") and Mike
+         Burger ("FreakDog") for the loan of the modems required
+         in order to test the routines!  (VAQ)
+93Mar08  Room Descriptions are now supported.  When a user creates a room,
+         the user will automatically be prompted to enter a description for
+         the room.  Room descriptions can be read by pressing "I" at the
+         room prompt.  If a description exists, Citadel will show it.  If
+         not, then Citadel will ignore the request in a kindly manner.
+         Descriptions can be edited by any Aide or remote Sysop.  Note also
+         that if a room has a moderator, this will be displayed automatically
+         as part of that room's <I>nformation.  This entire mess is auto-
+         maintaining.  That means Citadel will take care of everything without
+         burdening the Sysop with yet more meaningless file-maintenance
+         chores.  You will see bunches of files in your HomeArea directory
+         of the type "ROOMINFO.xx" where "xx" is a number (corresponding to
+         the room-number to which the ROOMINFO file belongs.  These are flat
+         ASCII files and could be edited by the sysop offline if so desired.
+         This whole mess is the brainstorm of Steve Williams.  I don't know
+         whether or not to thank him, though... Time will tell!  (VAQ)
+93Mar09  Added code to support reading "verbose" modem messages.   This
+         sidesteps the problem which results because not all high speed
+         modems offer a numeric connect-code for a 14,400bps session.
+         It also leaves the door open for future support of speeds higher
+         than 19,200bps without requiring "coding magic."
+            NOTE WELL: The NETWORKER still INSISTS on numeric codes, so in
+            your #callOutPrefix statement, be sure to include a "V0" to put
+            your modem into "numeric codes" mode.  (VAQ)
+93Mar12  Citadel will now display number of messages left to read when
+         user is configured to pause after each message.  Thanks to
+         the QuartzFolk and the Patriot for nagging this one into the
+         current release.  (VAQ)
+93Mar13  Citadel will now display Floor name in brackets directly in
+         front of room name, as in "[Main] Lobby>" instead of showing
+		 floor name only when moving to new floor.  This display is only
+         active for non-expert users and those in floor mode.  (VAQ)
+93Mar15  Version 6.04 released.  (VAQ, SMW, MAB)
+
+********** Special Reference for Modem Control (string) settings ************
+
+The following are the modem control strings in use at Jersey Devil Citadel.
+These have been tested, and found to work, with the Zoom 14.4 FAXmodem,
+the Supra 14.4 FAXmodem and the Compudyne (internal) 9642i modem.  We have
+strong suspicion that these strings will work with virtually all currently
+available high speed modems, however, you are left to your own devices.
+The usual symptom(s) of incorrect settings are: lockup of system after
+RING detect, failure to sync on networking in either direction.
+
+It is STRONGLY RECOMMENDED that you set your modem to send VERBOSE results.
+Citadel WILL read them.  The "W2" statement in the #modemSetup string tells
+our modem(s) to ONLY report "CONNECT xxxx" where "xxxx" is the DCE speed.
+You MUST have your FOSSIL LOCKED at 19200bps for all this modemMagic to work!
+
+#modemSetup "ATH W2 S25=1 S7=80 &C1 S2=255 E0 V1 X4 M1 S0=0 &D2 S36=7 S48=7 &Q5"
+#modemReset "AT S0=0 S2=255 S36=7 S48=7 &Q5"
+#modemIdle "AT S0=0 S2=255"
+#modemAnswer "ATA"
+
+#callOutPrefix "AT &Q6 S36=3 S48=128 V0 M1DT"
+#callOutSuffix "\r"
+
+*****************************************************************************
+

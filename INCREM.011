@@ -1,0 +1,22 @@
+90Apr18  Added support for READ-ONLY rooms, including "R" option in the
+         "Aide Edit Room" command-list to set/unset the READ_ONLY bit
+         Only a remote sysop (or sysop at the console) can use this
+         command.  A logged-in remote sysop is still able to enter
+         messages to read-only rooms.  Note that a room can only be
+         set to READ_ONLY if you can EDIT the room, which eliminates
+         the BaseRoom, Mail, and Aide.  Acknowledgement here must go to
+         Dave Parsons (Orc) as it was on his STadel systems that I
+         first encountered a read-only room on a Citadel.  (VAQ)
+90May15  Added code to support checking BADUSERS.SYS in the
+         HomeArea directory when a new user logs on via modem.
+         New user name is checked against contents of this file
+         and if a match is found the new user is politely disconnected
+         and his information is NOT saved.  This only happens when
+         you have the system set up in such a manner as to present
+         the new user with the terminal options choices at login.
+         Since some of the restricted login modes never reach this
+         code, they also will not check BADUSERS.SYS, however those
+         modes also never write to the log file.  (VAQ)
+90Jun16  General code-tightening to shorten executable file size
+         and fix a small bug.  (VAQ)
+90Jun20  Release of V5.11.  (VAQ)

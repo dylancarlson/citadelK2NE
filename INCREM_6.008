@@ -1,0 +1,89 @@
+93May12  Version 6.07 released.  (VAQ, SMW, MAB)
+93May21  Code tightening done on the Net_Switch code in K2NE.C,
+         with no impact on the sysop or user interfaces.  (VAQ)
+93May25  Time delay added to end-of-session disconnect during networking
+         to avoid un-necessary "Remote host sent disconnect" messages
+		 and to help eliminate confusing the Citadel-86 and Citadel-68
+         networkers which false-errored, caused mainly by the increased
+         efficiency of the FOSSIL-oriented modem routines we use.  (VAQ)
+93May28  When system reboots after a crash/recovery the message announcing
+         this event is no longer posted in the Aide room, but is placed
+         in CALLLOG.SYS instead (+recover parameter must be used in the
+         main BBS batch-file; see sample RUNBBS.BAT).  A blank line will
+         be inserted into CALLLOG.SYS prior to the notation of the rebuilt
+         file-system as a useful device to call attention to the event.  (VAQ)
+93Jun04  In response to several requests we present here, a quick review on
+         "How to set up DOORS for Citadel:K2NE"....
+
+         Exerpt from our RUNBBS.BAT file:
+
+ctdl rings=2 coltb=2,1,4,5,2 dead=15,2 noluck=3,7 doormin=%dr% %1
+if ERRORLEVEL 4 goto doors
+
+         The first important item is the "doormin=%dr%" parameter.  That
+         "%dr%" is an ENVIRONMENT variable, dr, set by our autoexec.bat file
+         and for DOORS to work, it should be AT LEAST 15.  It represents the
+         MINUTES that a user is allowed to be in any one DOOR.
+
+         Next is the "ERRORLEVEL 4" which simply means that when a user
+         leaves Citadel to run a DOOR, Citadel will exit on ERRORLEVEL 4, so
+         when this happens we jump to the portion of RUNBBS.BAT labelled
+         "doors" as seen in the following:
+
+:doors
+c:
+watch off
+cd \k2ne\door
+echo GOING TO DOOROPEN BATCHFILE NOW....
+dooropen.bat
+
+        When Citadel "comes down" we will be in the Citadel "home" directory
+        which most folks call "k2ne".  Here, it is C:\K2NE.  Now, for doors
+        to work, you MUST have a directory called DOOR "off of" your K2NE
+        directory (here, it is C:\K2NE\DOOR).  Citadel will create the file
+        called DOOROPEN.BAT, and that file will call your door by its number
+        or letter in your DOOR.BLB file which is found in your \K2NE\HELPAREA
+        directory.  For example, if your user chose to run Door #5, then
+        DOOROPEN.BAT will run 5.BAT, which YOU MUST WRITE.  This batchfile
+        will be different for each door you run.  Most "door programs" give
+        you sample batchfiles to help you "build your own."  For your
+        information, the program CTDLKEY.EXE MUST ALSO BE in your \K2NE\DOOR
+        directory, because IT is the utility that will create your DORINFO1.DEF
+        and PCBOARD.SYS files (these are used by the door programs themselves
+        and not by Citadel).
+
+        Finally, and VERY VERY VERY important, the LAST LINE of each of your
+        individual DOOR batch files MUST be "RUNBBS +noinit".  This calls
+        Citadel back to life after the user is done with the door, and the
+        "+noinit" parameter tells Citadel to leave the modem alone since
+        there is already a user online and a carrier present.
+
+93Jun16 System will now show "Citadel" for the user's location when the
+        user is in a hidden room (upon execution of the "@" command).  VAQ
+93Jun18 Alternative method of generating user <P>rofiles implemented.  If
+        you want the search for user profiles to be significantly faster,
+        run CLOG >USERLOG.IDX and put USERLOG.IDX in your Citadel "home-
+        area" directory.  USERBIO.EXE will then use USERLOG.IDX to find
+        the user's log-record instead of "grepping" through the USER files.
+        For a few users this will be slightly slower, for most it will be
+        much faster, in all cases it will now, essentially, take the same
+        time to generate and display the user PROFILE results.
+        IMPORTANT - you MUST use the version of USERBIO.EXE included with
+        Citadel:K2NE V6.08 in order to implement this method.  (VAQ)
+93Jun23 Added built-in screen blanker.  Parameter "blanker=#" should be added
+        to the RUNBBS batch file where CTDL is called.  If present, the
+        screen will blank after "#" minutes of 'waiting for a call.'
+        For example, "blanker=3" would blank the screen after 3 minutes
+        of inactivity at the "call waiting" screen.  Any type of activity,
+        from keyboard or modem, or upon initiation of an outbound net session,
+        will restore the screen.  (VAQ, SMW)
+93Jun28 Citadel now grabs user name, user status and date/time of user
+        last call from LASTON.# file (where # is the log slot number of the
+        user).  The file LOGDATES.SYS is no longer used and may be deleted.
+        Code which tracks the number of previous calls made by a user was
+        modified to reflect this change.  (VAQ, SMW)
+93Jun28 Code for V6.08 released to beta-test sites.  (VAQ, SMW, MAB)
+93Jul01 Version 6.08 released.  (VAQ, SMW, MAB)
+
+
+

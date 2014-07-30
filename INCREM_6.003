@@ -1,0 +1,29 @@
+91Dec07  Released V6.02.  (VAQ)
+92Feb02  Modified audio used with windowed reports.  (VAQ)
+92Feb07  Removed function "fakeFullCase()".  Most folks are using
+         terminals which support upper and lower case, and it should
+         be left to the writer how a message should appear!  (VAQ)
+92Mar07  Removed ability for Aide to read local or remote FIDO
+         log activity.  It struck me that this was too "FIDO-specific"
+         and would severely constrain future development.  Code is still
+         in CTDL.C module for this, as are all referenced functions, since
+         they will, in all probability, be used for other stuff down the
+         line.  (VAQ)
+92Jun15  Resumed work on code after house move!  (VAQ)
+92Jul14  Modified display format of message totals at room-prompts.  (VAQ)
+92Aug25  When a user is done visiting all rooms containing new messages,
+         and upon returning to the base-room by the "G" command, Citadel
+         will now print a message telling the user that all rooms have
+         been checked and no new messages remain.  Local sysop can use
+         ALLDONE.BLB in the help-area directory for a customized
+         message if the default is not satisfactory. If user is in "expert"
+         mode then the file ALLDONEX.BLB is used - if it exists.  (VAQ)
+92Aug27  When a user is done "reading the system" and returns to the base-room,
+         getting the message described in the 92Aug25 note, the user will
+         now also get a prompt asking if he wants to log off the system.
+         An affirmative answer will trigger the logoff routines.  (VAQ)
+92Sep10  Code tested on different system to check for problems.
+         Pre-release "shakedown" appears OK.  (VAQ)
+92Sep12  Released V6.03  (VAQ)
+
+

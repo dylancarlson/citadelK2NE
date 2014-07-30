@@ -1,0 +1,31 @@
+91Jul03  Released Version 5.19.  (VAQ)
+91Jul04  Cosmetic change to the ".W" directory listing.  (VAQ)
+91Jul10  Message Editor now shows room-name above "Entry cmd" prompt.  (VAQ)
+91Jul11  Message Editor now reports number of characters used and
+         number of characters remaining at the "Entry cmd" prompt.  (VAQ)
+91Jul14  Streamlined code that handles modem resets.  (VAQ)
+91Jul15  Code modified to tighten conditions under which the daily caller
+         number is incremented.  Number will only be incremented on
+         login after new-carrier or when ".TS" is followed by a login
+         and the new login is a different user than the previous login.
+         Specifically, if a user goes to a door and then logs in upon
+         returning from the door, the caller counter will not increment.
+         This will serve as a more accurate guage of system activity.  (VAQ)
+91Jul17  Adjusted handling of CTDLTABL.SYS table in anticipation of
+         needs for addition of multi-user capability.  Code disabled
+         until actual release of multi-user code at a later date.  (VAQ)
+91Jul20  Added code to support changing the direction of sequential
+         message reading by using "+" or "-" key when user has pause
+         feature activated between each message.  Added "<+/->" option
+         to the prompt between messages.  (VAQ)
+91Jul21  When a user is configured to pause between messages, and if
+         the users chooses to <R>eply to a message in a networked
+         room, then Citadel would generate a faulty message-header which
+         would lead to the originating system sending "bad Netmail" to
+         other systems sharing that room.  This bug is fixed.  (VAQ)
+91Jul26*
+       * Development suspended - trip to Colorado.  (VAQ)
+91Aug15*
+91Aug16  Released Version 5.20.  (VAQ)
+
+

@@ -1,0 +1,32 @@
+91May27  Released Version 5.18.  (VAQ)
+91Jun13  Added code to support ".U" and ".EU".
+           .U: User-information -- Citadel will prompt for the user
+           name, and then will search for an "information file" that
+           the user may have posted.  If present, the file is typed
+           to the logged-in user.
+           .EU: Enter user information -- Allows a user to enter
+           a comment about him/herself.  Full Citadel editor is
+           available for comment entry, and size is limited by
+           maximum message size in CTDL.H module.  If such
+           a file already exists, the user will be shown the current
+           file and asked if it is to be changed.  (VAQ)
+91Jun15  Added code to support ".W" for logged-in users.
+         ".Who's on file" will search for those users who have left
+         information files via ".EU".  Citadel will then display this
+         name-list to the user in a column-formatted manner dependant
+         on the terminal-screen-width of the user.  (VAQ)
+91Jun30  "The final word" on the ".EU", ".U" and ".W" commands:
+          1) ".U" will prompt the user to enter the name of a
+            person whose information file is to be displayed.
+            The user can enter ? for the name in order to see
+            a list of users who have information on file.
+            Pressing ENTER or ESC will abort from this.
+          2) ".W" will display the list of users who have
+            entered informational files.
+          3) ".EU" will show the current user his/her own information
+            file (if it exists) and ask if he/she wants to change it.
+            If a change is desired, the user is dumped into the editor
+            to create a new information file.  If the user has not yet
+            created an information file, then the user will be dumped
+            into the editor without being shown what doesn't yet exist! (VAQ)
+91Jul03  Released Version 5.19.  (VAQ)

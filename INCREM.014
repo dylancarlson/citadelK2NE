@@ -1,0 +1,46 @@
+90Oct24  Released V5.13.  (VAQ)
+90Nov23  Added code to prompt user during reading of LOGTEXT.### files
+         for those users who want to avoid reading bulletins.  The
+         prompt will NOT appear after LOGTEXT.024, so if you want your
+         system to "look pretty" you should a) have at least one
+         LOGTEXT file on hand and b) make sure that your last LOGTEXT
+         file is named LOGTEXT.024.  I didn't test this to see what would
+         happen if there are no LOGTEXT files.  If this proves to be a
+         problem, or even a major annoyance, just let me know and I will
+         fix it up.  (VAQ)
+90Nov24  Added code to allow users to toggle message numbers on/off in
+         message headers.  Command is ".ecm" with new user account
+         defaulting to ON.  This should keep the CitaPurists happy!  (VAQ)
+90Nov24  Completed code-tightening resulting in saving of about 4K
+         in CTDL.EXE file-size.  (VAQ)
+90Nov25  System will now determine if a user has already called "today"
+         and if so, will only show the user the LOGTEXT.### files on the
+         first call of the day.  (VAQ)
+90Nov25  Added support to show users files BULLETIN.000 thru BULLETIN.024
+         prior to showing the LOGTEXT.### files.  This covers the case of
+         a sysop who wants each user to read file(s) at login regardless
+         of how many calls per day the user has made.  The sequence is
+         as follows:
+             a) type out BULLETIN.000 thru BULLETIN.024 to the logged-in
+                user if the files exist, prompting for continuation after
+                each file.
+             b) check to see if this is the first call of the day for
+                the current user, and if so, type out LOGTEXT.000 thru
+                LOGTEXT.024 if the file(s) exist, prompting for
+                continuation after each file.
+         The files BULLETIN.### and LOGTEXT.### go in the HELPAREA
+         directory.  Citadel will manage resetting the "first call of
+         the day" business by itself when the date changes.  This data
+         is stored in DAYUSERS.SYS, which resides in the HOMEAREA
+         directory.  If you add a new LOGTEXT file, you can force users
+         to read the LOGTEXT files by simply deleting DAYUSERS.SYS
+         before you bring up the BBS.  (VAQ)
+90Nov27  A cute bit of fluff!  Modified the 'w' command ("Who ELSE is
+         here") to work outside of the Mail> room, but when used outside
+         of Mail> it accesses the DAYUSERS.SYS file and displays the names
+         of today's callers.  Nothing dramatic, and probably very much
+         unCitadel, but... cute!  (VAQ)
+90Nov28  Added code to read list of today's users (DAYUSERS.SYS contents)
+         by pressing ALT-L while system is "waiting for next call."  (VAQ)
+90Dec01  Released V5.14.  (VAQ)
+

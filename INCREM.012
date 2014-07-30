@@ -1,0 +1,22 @@
+90Jun20  Release of V5.11.  (VAQ)
+90Jun24  Added code to support the ".RM" command, which allows users to
+         read an individual message in a room by entering its message
+         number.  Command displays available range of message numbers
+         and prompts for user choice.  (VAQ)
+90Jun25  Added ".R#" - does the same thing as ".RM" - to see which
+         command is preferred by users.  (VAQ)
+90Jun29  Added message-numbers to header displays.  (VAQ)
+90Jul04  Added <Q>uikHeaders command - displays the headers for
+         messages in current room.  As extended command, employs
+         the same options as the ".r" command.  (VAQ)
+90Jul07  Made cosmetic improvement to ".rm" and ".r#" commands.  (VAQ)
+90Jul15  Added "logtry=nn" parameter.  If present, the integer value of
+         "nn" determines the number of bad login attempts before the
+         system drops carrier on the caller.  Defaults to 20 if not
+         used.  Example: logtry=3 will hang up on the caller after the
+         third bad login attempt.  Before dropping carrier on the
+         unsuccessful caller, the system will type-out BADHACK.BLB if
+         it is present in the HelpArea directory.  (VAQ)
+
+
+

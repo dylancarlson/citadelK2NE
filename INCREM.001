@@ -1,0 +1,140 @@
+/**************************************************************************/
+/*                    INCREM.001    K2NE Alpha Test Site                  */
+/**************************************************************************/
+
+/**************************************************************************/
+/*          Audience:   Citadel-86 sysops, potential sysops and other     */
+/*                      miscellaneous dementiae.                          */
+/**************************************************************************/
+
+/**************************************************************************/
+/*          Purpose:  To try and keep order where order is needed, and to */
+/*                    help keep track of the hacking and twiddling known  */
+/*                    as Citadel code development.                        */
+/**************************************************************************/
+
+/**
+  *
+  *  Since this file is being started about two months after-the-fact,
+  *  the first few items will naturally not reflect their chronological
+  *	 order of addition to the Citadel-86 code.
+  *
+  *  Hopefully, we will keep this file, and its successors, reasonably
+  *  contemporaneous with the actual additions to the so-called
+  *  "K2NE Dialect" of Citadel-86.
+  *
+  **/
+
+/**************************************************************************/
+/*       																  */
+/**
+  *
+  *
+   The following features were added to the code as received from the
+   C-86 Test System BBS.  The parent code to V3.09.07:K2NE originally
+   was Citadel-86 V3.05, then V3.09 upon the addition of Anytime Network
+   by Hue, Jr. of the Twin Cities (MN) area, without whose untiring effort
+   Citadel-86 simply would not exist!
+
+   This list is current as of August 15, 1988.
+
+   1. Addition of the "+seemail" command-line option which has the effect
+	  of making what a user does while in Mail> visible.  This was the
+	  original intent.  The byproduct of this code was that it also made
+	  what a user does in an Anonymous room visible to an observer seated
+	  at the system console.
+
+   2. Addition of the "+" and "-" key commands at any room prompt which
+	  allows the user to move between rooms.  If the user is NOT in floor
+	  mode, then the effect of these keys is system-wide with the EXCEPTION
+	  of the Mail> room, which these keys bypass.  If the user IS in floor
+	  mode, then + and - only allow for movement between rooms on the CURRENT
+	  floor.  Leaving a room by using + or - does NOT set the messages in the
+	  room as "old".  Future revisions may change this, however, as it seems
+	  to have introduced a bit of user-confusion.
+
+   3. Use of the ">" and "<" keys to move between floors.  This only works
+	  if the user is in FLOOR mode.
+
+   4. The "style" of the messages reported to the CALLLOG.SYS file was
+	  completely revamped, making them (hopefully) more readable and less
+	  cryptic.  In addition, the following user-activities are now reported
+	  to the CALLLOG file:
+		  a) chat requests if chat is not activated
+		  b) user uploading/downloading (protocol transfers only - no reports
+			 for such things as textfile reading, archive directory reading
+			 and such).
+		  c) Network sessions
+		  d) System ups and downs
+		  e) Backup of the CALLLOG file (see note on this later)
+
+   5. The "style" of the NETLOG.SYS file was extensively modified in order
+	  to reflect the layered-approach to networking which seems to be in
+	  vogue these days thanks to the ISO.  In addition, certain new
+      NETLOG reports were introduced along with FlashMail! and the
+	  addition of the Net_Switch series of operations.
+
+   6. New AIDE commands:
+		  a) .AQS  Aide: Query System-log
+		     This allows an aide to read CALLLOG.SYS from any room.
+		  b) .AQN  Aide: Query Network-log
+			 This allows an aide to read NETLOG.SYS from any room.
+		  c) .AQBS Aide: Query Backup System-log
+		  d) .AQBN Aide: Query Backup Network-log
+		  e) .AQU  Aide: Query UserBase
+			 This displays a very comprehensive list of all system
+			 accounts, together with most of the configuration options
+			 selected by each user.  Also shows which users know which
+			 rooms, which have long-distance net credits, and such.
+
+   7. New Remote-sysop (and CTRL-L) functions
+		  a) .ADE  Aide: Delete Empty-rooms
+		  b) .ADS  Aide: Delete System-log(*)   *These commands cause a .BAK
+		  c) .ADN  Aide: Delete Network-log(*)    file to be generated.
+          d) CTRL-L <G>: (General Maintenance Menu)
+				 <S>  System log review
+				 <N>  Network log review
+				 <B>  Backup log files
+			 The reason we did this was so that the system log, net log,
+			 and log backups could be done from console without logging in.
+
+   8. FlashMail! routines
+		 This enables system-to-system mail forwarding through the
+		 .ECA user profile (configuration) option.  Previously, mail
+		 forwarded by this option would stop at the system where
+		 it was sent, even if the recipient on that system had
+		 his forwarding address set to another system.  This is
+		 no longer the case.  Multiple node mail forwarding is
+		 now enabled via this method.  In addition, as a piece of
+		 mail "makes its way" from node to node to its recipient,
+		 the return mailpath is attached to the message so that
+		 if the recipient elects to respond to the mail, the response
+		 will "know" how to get back to the original sender.  Appropriate
+		 safeguards are in the code to eliminate "infinite loops" and
+		 other nastiness.
+
+   9. Net_Switch routines
+		 Sysop-definable mail PATHways.  See the narrative file
+		 READ.ME which accompanies the release of V3.09.07 for
+		 an in-depth treatment of this topic.  The reason for
+		 this approach was the eminent distaste Alan and I have
+		 for Unix-style pathing.  We wanted to make this as
+		 invisible to the user as possible.  We think that we
+		 succeeded.  Nodes for which a Path is defined will appear
+		 in the list of nodes that the user is shown when pressing
+		 "?" after being prompted for the "system to send to"
+		 when entering network mail messages.  The user has no
+		 way of knowing which nodes are directly netted and
+		 which nodes are via pathways, nor should the user
+		 care since the effect (as far as the user can see)
+		 is identical.  Again, return paths are built up as the
+		 message makes its way to its destination so that reply
+		 paths are inherent.  In both FlashMail! and Net_Switch,
+		 a mail message will STOP as soon as it finds its recipient
+		 on a system in the path.  If the recipient has his forwarding
+		 address set, FlashMail! will then supercede Net_Switch from
+		 that point to the ultimate destination node.
+  *
+  *
+  **********************************************************************/
+

@@ -1,0 +1,74 @@
+93Mar15  Version 6.04 released.  (VAQ, SMW, MAB)
+93Mar14  Work begun on V6.05.  (VAQ, SMW, MAB)
+93Mar15  User Biography code reworked and activated.  Command ".u"
+         allows online user to type name of a user and if a biography
+		 file is found, Citadel shows it to the online caller.  Pressing
+         a "?" will show a list of users having biographies on file.
+         Required external utility is USERBIO.EXE which belongs in your
+         Citadel "Home-Area" directory.  The biography system is
+         completely self-maintaining.  (VAQ, SMW)
+93Mar19  Citadel will now show the room description to a user whenever
+         the number of new messages in the room equals the total number
+         of messages in the room.  This will ALWAYS happen the first
+         time a user visits a room, and will happen again for those
+         rooms where the user is not "keeping up."  (VAQ)
+93Mar19  The file HELPOPT.HLP, which contains the text printed when
+         a user does a ".Help ?" (presumably a sysop-maintained list
+         of *.HLP files in the HELPAREA directory) is no longer needed.
+         Now, when a user does a ".Help ?", Citadel will automatically
+         scan the HELPAREA directory and print the name of each helpfile,
+         truncating the ".HLP" from the file name, and will present the
+         list to the user in a nice columnized format.  (VAQ)
+93Mar21  Pressing "@" at any room prompt will give the user a report of
+         port-assignment and session time.  This may be quite temporary
+         depending on whether it gets utilized by callers.  (VAQ)
+93Mar25  At startup, Citadel will search for a file called FASTNET.SYS
+         which, if needed, should contain the #CALLOUTPREFIX that your
+         modem MIGHT need to use in order to dial out to network at
+         9600bps or higher rate(s).  This is to be used to set up a
+         special string to enable/disable protocol-negotiation or
+         negotiation progress reporting, or any other high-speed modem
+         tweak you may need to do in order to get networking to stabilize
+         at high speed.  At Jersey Devil we are using "AT V0 W0 DT", but
+         Citadel will use this string as a DEFAULT if FASTNET.SYS is
+         missing.  This string REPLACES the #callOutPrefix string in
+         the event of network OUTDIALING at 9600bps or higher.  (VAQ)
+
+*MAJOR ADDITION NOTE*
+93Mar27  Telnet functions activated for users with "*" access which can
+         be set by Sysop (or Aide with system password) using the "V"
+         command from the Sysop Commands level.  User hits "*" from
+         any room-prompt and gets "network>" prompt.  "V" views available
+         dialout nodes, and "t" drops user to "telnet>" prompt, which
+         expects user to type node name to dial.  Citadel then uses
+         ADDITIONAL COMM PORT to "shuttle" the online user to the foreign
+         host in a fully-interactive session mode.
+
+		 Activate this by using "SHUTTLE=MODEM" as a command line argument
+         for CTDL.EXE in your RUNBBS.BAT file (or equivalent).  REQUIRES
+         that you initialize your FOSSIL for dual-port operation, and we
+         RECOMMEND that you lock the baudrate of both ports if using
+         a high speed modem on the Shuttle Port.
+
+         Additional Hardware Requirement: Second serial port with modem.
+         Citadel will auto-sense the BBS on COM1 or COM2 and will assign
+         the "shuttle port" to the opposite COMport (BBS on COM1,
+         ShuttlePort on COM2, or vice-versa).  ONLY COM1 and COM2 supported.
+         It is strongly recommended that the Shuttle Port modem be no
+         faster than the BBS port modem.  Otherwise all sorts of evil and
+         unpredictable things may happen to your user.  (VAQ, SMW, MAB)
+93Mar27  Added Telnet functions for the Sysop - via the Sysop Command
+         level.  Functionally identical to preceeding note except that
+         it uses the BBS PORT modem and NOT the SHUTTLE PORT modem.
+         Possibly contains a few lurking flakies, but will be completely
+         cleaned up for next release.  (VAQ)
+93Mar27  Added "<P>rofile" as an option for those using "pause between
+         messages."  If the user selects "P" Citadel will search for
+         a user "bio" for the author of the current message, if found
+         will show it, if not found, will chug merrily along!  (VAQ, SMW)
+93Apr03  Version 6.05 released.  (VAQ, SMW, MAB)
+
+         Citadel:K2NE Version 6.05 is dedicated with love and best wishes
+         for their everlasting happiness to Jessica M. Phelps and
+         Steven M. Williams.  (VAQ)
+

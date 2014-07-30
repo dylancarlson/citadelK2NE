@@ -1,0 +1,31 @@
+91Feb16  Version 5.16 released.  (VAQ)
+91Feb17  Added code to tell user how much download time will be left
+         for current session prior to beginning a download.  Rounds down
+         to next whole minute value.  (VAQ)
+91Feb19  Added code to report session download time-limit at login.
+         If user does not have download privs, this display is skipped. (VAQ)
+91Mar23  Added code to display local time-of-day to user above each
+         room-prompt.  A rather useless thing, but cute.  (VAQ)
+91Mar30  Added code to give "<A>gain <S>top <R>eply [N]ext: " after each
+         message if logged-in user's account is configured to pause
+         after each message.  If the user elects to <R>eply, sequential
+         message type-out resumes with a repeat of the message to which
+         the reply was entered.  User may press ENTER for a default to
+         the "[N]ext" option.  (VAQ)
+91Apr03  Added user configuration option to set the number of lines on
+         the user terminal in order to activate a "-More-" prompt at the
+         end of each terminal page during reading of long messages or
+         formatted textfiles.  Configuration command is ".ECS" and
+         it supports a range of 0 to 50 lines.  A value of 0, if
+         selected, will defeat the "-More-" prompt and allow for
+         "normal" continuous type-out.  Updated version of CONFG.MNU
+         will be included with the V5.17 release file-sets, but can be
+         just as easily generated locally.  (VAQ)
+91Apr13  Minor modification to console output display in CITAGATE
+         utility.  CITAGATE utility now released as Ver. 1.04, but
+         Ver. 1.03 remains completely compatible.  No need to upgrade
+         except for console display change.  (VAQ)
+91Apr15  Added a <H>elp option to the prompt between messages for
+         users configured to pause after each message.  Requires
+         PAUSEMSG.BLB for full usage.  (VAQ)
+91Apr28  Released Version 5.17.  (VAQ)

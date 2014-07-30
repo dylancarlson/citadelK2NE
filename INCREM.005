@@ -1,0 +1,77 @@
+89Jan07  Patched the "<D>ownload a File" command to accept user-
+         selected protocols via self-generating list of active
+         protocol options.  Created separate function to handle
+         the protocol-list generation and selection.  Created
+         new function to handle "<U>pload a File" command and
+         'hooked' it into the protocol-selection function. (VAQ)
+89Jan08  Added code to "blink" the contents of the status bar
+         if the user does a <C>hat request.  Blink shuts off
+         on user termination, loss of carrier, or sysop response
+         to the chat request, whichever occurs first. (VAQ)
+89Jan09  Added code to send NOTICE40.BLB to user at login if
+         user screen-width  is set to 40col or less, otherwise
+         to send NOTICE.BLB.  In either case, file is only sent
+         if it exists.  Kudos to Tom Mailloux for this idea! (VAQ)
+89Jan15  The USER option for message-reading has been adjusted
+         to allow callers to SKIP messages by specified user as
+         well as to read ONLY messages by specified user. (VAQ)
+89Jan16  Code added to the Doors handler to generate file ALTERN.DEF
+         for use by TradeWars-1000 as a door application.  This
+         includes proper flagging of Citadel to properly handle
+         logoff after a user runs the TradeWars door.  If used,
+         the TradeWars door MUST be door "T" and may require
+         a LOT of fiddling in order to get it to run properly.
+         Citadel:K2NE now RESERVES exit-level EIGHT (8) for
+         use with TradeWars, so do NOT use "IF ERRORLEVEL 8"
+         in your BBS batchfiles and do NOT use "8" as an exit-level
+         for any #event in your CTDLCNFG.SYS file. (VAQ)
+89Jan19  Added code in LOG.C to support reading a file called
+         DAYNOTES.BLB immediately after NOTICE.BLB.  As usual,
+         if the file is not there, the operation is simply skipped.
+         If DAYNOTES.BLB is to be used, it should go where the
+         .HLP and .BLB files are located. (VAQ)
+89Jan19  Added code in LOG.C to support shelling to a batchfile
+         called LOGGED.BAT immediately after Citadel acknowledges
+         user login.  This provides for a "run at login" Door
+         application, or use of an external program to generate
+         a timely file for use as DAYNOTES.BLB provided external
+         support for proper file/directory manipulation is provided
+         via the LOGGED.BAT file.  If LOGGED.BAT does not exist in the
+         "Home" directory this entire operation is skipped. (VAQ)
+89Jan21  Rewrote external-protocol handler calls in AB.C to enable
+         local modification so that individual sysops can use any
+         external protocol driver they wish instead of being
+         "forced" to a particular driver.  File XFERCTL acts as
+         a "script interface" between Citadel and the external
+         protocol drivers to enable local command-line modifications
+         and any special "bells and whistles" the sysop may want.
+         Citadel passes protocol, baudrate, and logged username
+         to the handler interface for those drivers needing this
+         information. (VAQ)
+89Jan22  Modified CTDL.C and AB.C to re-enable the Windowed Xmodem
+         protocol.  (VAQ)
+89Jan28  Added code to execute, if present, NEWUSER.BAT at new user
+         login to enable sysops to install a "new user" door.  This
+         permits such things as "forcing" a new user into a Questionaire
+         door.  If system is running with LOGINOK set to 0 (closed)
+         then it will skip this routine entirely.  If NEWUSER.BAT
+         is not present, routine is skipped even for open
+         login systems. (VAQ)
+89Jan31  Added code to write LASTUSER.SYS to homeArea directory at
+         system shutdown.  This file contains the name of the last
+         logged-in user on the system.  At system bootup, LASTUSER.SYS
+         is read and the last user's name passed to Citadel for use
+         in the status bar and the ".RS" command. (VAQ)
+89Feb01  System will now display POLICY.HLP to a new user immediately
+         after the new user exits the NEWUSER.BAT execution area, or
+         immediately after the new user completes the config questions
+         in the absence of NEWUSER.BAT.  The "Type .Help POLICY" message
+         is no longer displayed. (VAQ)
+89Feb04  Modified output format of the ".RE" command. (VAQ)
+89Feb06  Adjusted ".RE" format to adjust indentation depending on
+         user screen-width. (VAQ)
+89Feb09  Eliminated bug which would cause system to go "brain dead"
+         on lost carrier during message entry. (VAQ)
+89Feb11  Minor changes to the network log messages format. (VAQ)
+89Feb12  Released V4.05 with upload to GEnie. (VAQ)
+

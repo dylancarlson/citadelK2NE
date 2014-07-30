@@ -1,0 +1,154 @@
+89Feb15  Door code changed.  Citadel now comes down with exitlevel
+         of FOUR (4) when user selects an active Door.  Main BBS
+         batch-file must contain "IF ERRORLEVEL 4 GOTO <label>"
+         to handle this.  The <label> section of the main batch
+         file should move to the \homeArea\DOOR directory and
+         then execute DOORNAME.BAT, which Citadel will create
+         in that directory prior to coming down.  Each Door
+         batch file must return to ROOTdir after finishing
+         the Door, then call the main BBS batch file with
+         a parameter of "+noinit".  This will cause Citadel
+         to come back up, skipping the modem initialization
+         section, and present the user with the BASEROOM
+         prompt and await a re-login.  Current UART baudrate
+         is passed via the file LASTUSER.SYS and is read by
+         Citadel during the NOINIT reboot.  The purpose of this
+         modification is to allow for more memory space during
+         Door operations. (VAQ)
+89Feb17  Added command-line parameter "+olddoor" for those who
+         do not want to switch their door-handling methods to
+         the new wiz-bang method!  This is probably just a
+         temporary patch. (VAQ)
+89Feb20  Added command-line parameter "+doors" which brings
+         Citadel back up with NOINIT and also sets flags
+         for kludgey reset at end of current online session. (VAQ)
+89Feb22  Added command-line parameter "doormin=" to allow sysops
+         to set the per-use time limit for those doors and door
+         utilities controlled by DORINFO1.DEF instead of using
+         a hardcoded time parameter in Citadel itself. (VAQ)
+89Mar10  Added support for reading ZIPfile directories. (VAQ)
+89Mar12  Added support for selectively downloading members of
+         ZIPfiles using Ymodem or Zmodem.  Activating this
+         facility is done by placing a file called UNZIP.SYS
+         in the RoomArea directory (where DEARC.SYS already
+         should reside) and putting the name of the "unZip"
+         utility in that file.  Also, copy of Zip utility
+         and Arc utility must reside in ROOT as "zipper.exe"
+         and "archiver.exe" respectively.  Facilities have
+         been tested using PKZIP.EXE as "zipper.exe" and
+         PKARC.EXE as "archiver.exe."  Others *may work but
+         these two are *known to work.  (VAQ)
+89Mar12  Removed internal code for reading ARC directories
+         and replaced it with a shell to "archiver.exe".
+         This adds no memory overhead and reduced executable
+         file size by about 1K in CTDL.EXE. (VAQ)
+89Mar18  Disabled "General Maintenance" sysop command from the
+         public runtime code.  In view of the function-key
+         facilities supported, it was a superfluous command.  (VAQ)
+89Mar19  Released Citadel:K2NE V4.06  (VAQ)
+89Mar20  Time-slicing code written to make Citadel a bit easier
+         to run under "multi-tasking" shells such as DesqView
+         and DoubleDos.  (BBR)
+89Mar21  Last caller to system, last caller's connect-speed and
+         current status of Mail> flag pulled into CtdlTabl.Sys
+         file.  LASTUSER.SYS no longer needed.  Code pulled.  (BBR)
+<><><><><><><><> Start MAJOR VERSION 5.0 at this point <><><><><><><><><>
+89Mar24  Encryption routines disabled and utility UNCRYPT.EXE written to
+         decrypt files on an encrypted Citadel in order to convert
+         to the "cleartext" version.  To compile without encryption
+         use "-DNO_CRYPT" at compile-time.  (BBR)
+89Mar27  Command ".RC" [read contents-of-packed-file] written to
+         replace .RAD and .RZD command sequences.  Requires the
+         use of public domain utility IFL.COM to read ZIP and
+         ARC file contents from shell.  (VAQ)
+89Apr02  Minor bugs repaired!  (VAQ)
+89Apr03  Net_Switch headers suppressed except during mail routing
+         functions, in accordance with the Joint Policy Statement
+         and Agreement between Citadel:K2NE and STadel development
+         groups.  (VAQ)
+89Apr05  Citadel:K2NE Ver. 5.0 released.  (VAQ)
+89Apr12  Minor bug-swatting!  Maintenance upgrade of Ver. 5.0
+         released.  Also, some cosmetic changes to the reporting
+         "style" in NETLOG file.  (VAQ)
+89Apr22  Code added to show previous caller's name to current
+         caller at login.  (VAQ)
+89May28  Code added to display FIDODAY.HLP at login if present.
+         Intent is to allow sysop to show the FIDOnet daily
+         message summaries for active FIDO conferences.   Note
+         that FIDOnet is NOT directly supported by Citadel, but
+         must be utilized as a Door.  (VAQ)
+89May29  Aide callers are given a "user level" of 5 for purposes
+         of Doors such as SmlNet which support such things.  All
+         other logged-in callers have a "level" of 2.  (VAQ)
+89Jun25  Version 5.01 released.  (VAQ)
+89Jun25  COLOR= and STATUS= added as command-line options to set
+         screen (background/foreground) and statusline colors.
+         This replaces the usage of the DOS environment to handle
+         this stuff.  See any good DOS reference guide for color
+         code numbers (or just play with it until you find a
+         combination that you like).  Supports MDA, CGA, EGA
+         and VGA monitor/card combinations.  (VAQ)
+89Jul01  Screen FOREground color can now be incrmentally selected
+         by use of F8.  Similary, screen BACKground color can be
+         selected by F7.  If Citadel is restarted it will take the
+         screen Fore/background colors from the settings of COLOR
+         and STATUS in the batchfile (if any), defaulting to (0,0).  (VAQ)
+89Jul03  Added support for handling "*.LZH" files of the type created
+         by the Japanese file-archiving utility LHARC.EXE.  System
+         now handles these in the same manner as *.ARC or *.ZIP files.
+         Needed a new command, so ".RH" was utilized for "read LHARC..."
+         options.  (VAQ)
+89Jul05  Version upgraded to Version 5.02 for internal purposes.  (VAQ)
+89Jul09  Net stabilization during AnytimeNet Receive streamlined by
+         passing through the previously-determined baudrate of the
+         incoming call.  Increment Net Version to 1.11.05 reflecting
+         this enhancement.  Compatibility with older versions not
+         diminished in any way.  Change is in SYSDEP1.C.  (VAQ)
+89Jul15  Added "+fast" command-line option.  This will speed up sending
+         command strings to the modem.  If the modem can handle these
+         speeds, it saves 5 to 10 seconds during system startup and at
+         networking time.  Works with Avatex-2400 series and probably
+         most non-Hayes "Hayes compatibles".  For some odd reason, not
+         all "real Hayes" modems can do this!  (VAQ)
+89Jul22  Door-use privileges can now be linked to a user's possession
+         of network privileges.  If you need this on your system to
+         block a "door hog" you must compile the entire BBS using
+         "-DTWIT" to define the "TWIT" variable in your makefile for
+         CTDL.EXE.  When the code is compiled in this manner, a user
+         will not be permitted access to any doors unless the user
+         has network privs.  This has not been tested for "non-networking"
+         node option.  Don't know if it works if you set up your Citadel
+         as a non-networking system.  (VAQ)
+89Jul24  Temporarily using the "`" key to display the network log from
+         the "waiting for call" mode.  This will soon change to a function
+         key.  (VAQ)
+89Jul25  Linking of Door privs to Net privs is now done via command-line
+         parameter "linkprivs" rather than method noted on 89Jul22.  (VAQ)
+89Jul26  Citadel will now track the number of messages created by a user
+         during a logged session and post it to the CALLLOG.SYS file at
+         logout.  (VAQ)
+89Sep03  F9 key is now used to read the network log from the console
+         while system is waiting for incoming calls.  (VAQ)
+89Sep03  RELEASE of Citadel:K2NE Version 5.03 for public use.  (VAQ)
+89Sep12  System will now display SPECIAL.HLP at login if it exists.  (VAQ)
+89Sep24  System will no longer look for DAYNOTES.BLB, FIDODAY.HLP or
+         SPECIAL.HLP at login.  Instead, system looks for up to five
+         ASCII files (named LOGTEXT.001 thru LOGTEXT.005) and displays
+         them at login if they exist (search/display is numerically
+         ordered by the file extension).  (VAQ)
+89Oct19  System will no longer prompt for #Nulls at new user login.
+         Default set to 0 for nulls.  Leave it up to the user to
+         set it using ".ec".  (VAQ)
+89Oct19  Added ".EL" (.enter local-only-message) command.  (VAQ)
+89Oct21  Modified CHAT to ignore unlogged callers.  (VAQ)
+89Oct24  Added "<L>ocal-only Save Message" at "Entry Cmd:" prompt.  (VAQ)
+89Oct24  Added Door-privilege toggle to Sysop command set.  New users
+         default to HAVING door privs when new account is created.  (VAQ)
+89Oct24  Started work on using "logBuf.lbflags.lflag3" to handle
+         flag for user's Door graphics level.  (VAQ)
+89Oct25  Minor hack to show Door privs instead of linefeed status for
+         the ".aqu" command.  (VAQ)
+89Oct26  Added command-line param "nodoors" for sysops who want new users
+         to default to NO door privs.  Leave this param out, and new
+         accounts will HAVE door privs.  (VAQ)
+

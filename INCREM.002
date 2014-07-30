@@ -1,0 +1,104 @@
+88Aug17: Force Citadel to spell-out "windowed" if user selects windowed
+         xmodem protocol for up/down-loading. (VAQ)
+88Aug17: Completed hack using mini-Interpreter for ctdlcnfg.sys to send
+         AT[return] and then the modem init string at completion of
+         each call, including net calls.  Seems to work fine with the
+         Avatex 2400 external modem, and resets modem to 2400bps after
+         hangup of modem, even for net calls. (VAQ)
+88Aug17: Completed additions/corrections to source code to clean up
+         problems in the auto-baudrate-detection routines.  This was
+         using Fountain PC/XT-Turbo with Multifunction card
+         and Avatex 2400 external.  Also tested at 1200bps using the
+         Columbia PC with its modem port and Avatex 1200HC external.
+         Also tested at 2400bps installed at "Outside the Asylum" node
+         running the Supra 2400bps external modem.  (AB and VAQ)
+88Aug18: runHangup() function added to CTRL-L 'R' [in CTDL.C]
+         to force flush of modem input buffer when re-initializing
+         the modem.  Should be done whenever chatmode is used to
+         out-dial. (VAQ)
+88Aug18: Modified the screen message and modem message for system
+         crashes - took out the "leave mail on Test Sys" to help
+         keep things straight!  Also, simulated DOS prompt to user
+         on crash exit. (VAQ)
+<><><><><><><><><> Beginning of Ver. 3.09.08:K2NE <><><><><><><><><><><><>
+88Aug20: Changed report on Buffers to simply report number of characters
+         in the RS232 in_buffer at carrier detect. (VAQ)
+88Aug21: Add "M" and ".M" to bring user directly to Mail>. (VAQ)
+88Aug22: Phone library and dialing utility functions created and merged
+         with CTDL.EXE, with new files {ABPHONE.C, WIN.C, KEYS.H, WIN.H}
+	 callable from the Sysop Options menu. (AB)
+88Aug22: Phone library deactivated from main system unless "+phone" is
+         used as command-line parameter when running CTDL. (VAQ)
+88Aug24: Display availability of Phone library at bootup and between
+         user calls. (VAQ)
+88Aug24: Moved netReader() and logReader() into AB.C. (VAQ)
+88Aug24: Created ".AB" command combining effects of ".ADS" and
+         ".ADN" which may eventually disappear. (VAQ)
+88Aug25: Moved status bar to bottom of screen.  Also, added name of
+         last logged-in user as part of the ".RS" report.  Slightly
+         modified the format of the lead-in screen when no BANNER.BLB
+         is present - this was needed to keep AnytimeNet Receive
+         screwed on tightly. (VAQ and AB)
+88Aug26: First draft of Doors conceived. (AAB and VAQ)
+<><><><><><><><><> Beginning of Ver. 4.01:K2NE <><><><><><><><><><><><><><>
+88Aug26: Door Utility written as ABDOOR.C; Door batchfiles written;
+         TSR carrier-detect problem solved; Doors installed at
+         Jersey Devil for testing. (AAB and VAQ)
+88Aug27: Doors installed at Alternative Reality for testing. (AAB)
+88Aug27: Added "W" (Who ELSE is here?) to print userlist. (VAQ)
+88Aug28: "W" command modified - only works if logged in. (VAQ)
+88Aug28: New Doors interfacing code written, installed, debugged. (AAB)
+88Aug29: Extra linefeed "problem" while in a door determined to be
+         dependent on the user terminal and not the door or Citadel. (VAQ)
+88Sep01: Extensions to the ".k" command to permit displaying known
+         rooms by type (directory, private, anonymous, forgotten,
+         networked, and by user-provided match-string. (AAB)
+88Sep02: ".k" code patched to show "knownopt.mnu" menu file to user
+         if user selects "?".  Also, cosmetic improvements to the
+         ".kr" option. (VAQ)
+88Sep03: "QuickNet" code written and debugged (mostly!).  Sysop can
+         force Anytime-Net session from CTRL-L menu by selecting
+         option "Q" (QuickNet) -- only from local sysConsole, and
+         should NOT be logged-in.  If sysop is logged in, Citadel
+         will treat it as a ".TA" session since QuickNet will return
+         to MODEM/no-user mode after net is done.  This option only
+         polls nodes that are in your Anytime Net net# (and presumably
+         you should have only one such net type).  If no work needs to
+         be done, no net session occurs. (VAQ)
+88Sep05  Removed a nasty bug in the QuickNet routines. (VAQ)
+88Sep08  Some cosmetic modification done in order to reduce
+         executable code size. (BR)
+88Sep09  SEEMAIL routines made optional to the compiler by #IFNDEF
+         directives. (BR)
+88Sep10  Zenith-specific files and routines made optional via
+         #IFDEF directives.  Code can now be compiled for true PC
+         compatables without the CITZEN module. (BR)
+88Sep10  Sysop can exit the networker in between net calls by
+         using ESC key.  Option "I" removed from Sysop menu. (BR)
+88Sep11  Opening screen cleaned up so initial scroll-bar looks
+         more organized for Herc monographics systems. (VAQ)
+88Sep14  #ifdef MSG_FINDER added to disable CTRL L "Y" feature
+         unless selected by compiler preprocessor or by defining
+         MSG_FINDER in the MAKEfile. (VAQ)
+88Sep14  Added SPACEBAR as acceptable user input to <P>ause
+         system type-out. (VAQ)
+88Sep17  #ifdef and #ifndef HUE_STYLE added (CTDL.C).  This makes the
+         new-style Video (inverse video status bar in place of
+         username above room-prompt etc.) the default when
+         compiling.  To do it Twin-Cities style, define HUE_STYLE
+         in the MAKEfile prior to compiling. (VAQ)
+88Sep17  Replaced hardcoded message with file "holdbuff.blb" in
+         #HELPAREA directory to tell user there is a message in
+         his holding buffer at login. (VAQ)
+88Sep19  Changed format of net roster to present "need to call" status
+         and "disabled" status in more readable format. (VAQ)
+88Sep23  Fixed bug in AB.C that could crash system if user attempted
+         to view node list by pressing "?" after ".EN" in the
+         mail room.  We now check for existence of NETPATH.SYS
+         and if not present, return from function cleanly. (VAQ)
+88Sep24  Optional compile of Debug switch in CTDL.C using
+         "#ifdef DEVELOP_VERSION" which also optionalizes other
+         code involving reporting Debug status to console/modem. (VAQ)
+88Sep26  Modified code so that unlogged users can always read in
+         LOBBY (baseroom) regardless of setting of READOK. (VAQ)
+88Oct03  Released Ver 4.01 (AB, VAQ, BR)

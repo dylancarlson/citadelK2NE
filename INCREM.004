@@ -1,0 +1,121 @@
+88Nov14  Version 4.02 released. (AB, VAQ, BR)
+88Nov20  General "code cleaning" to shorten executable file size. (VAQ)
+88Nov21  Current date is now displayed on Status-bar except during
+         short "special message" functions; e.g. modem-init. (VAQ)
+88Nov22  Network start time/date is now displayed on Status-bar
+         while system is in networking mode. (VAQ)
+88Nov22  Status bar will now report time/date when system checks
+         for "need to net" during Anytime-Net window(s),
+         even if there is no need to network. (VAQ)
+88Nov24  Status of SeeMail variable is now reported to the
+         status-bar when system is in idle-mode.  Toggling
+         this variable by CTRL-V immediately updates status-bar
+         if system is idle, otherwise reports to active Console
+         screen but not to online user. (VAQ)
+88Nov29  Massive editing of code in CALLLOG.C resulting in
+         more concise coding and reduction of about 1K in
+         CTDL.EXE filesize. (BR)
+88Nov29  First successful test of packet-radio gateway
+         via Doors at Morningstar Keep. (BR, VAQ)
+88Nov30  When aide-user does ".RS" the system will now say
+         "Logged in as Aide, UserName" as in the original
+         CP/M version.  Otherwise, it reports only the name. (VAQ)
+88Dec01  Call-log now reports when a user "closes" a Doorway. (VAQ)
+88Dec03  Modified function putWord() located in MSG.C to columnize
+         the output of CALLLOG.SYS when the log file (or backup file)
+         is viewed.  Flags and parameters are passed to putWord()
+         from logReader() located in AB.C. (VAQ)
+88Dec03  Specific "Carrier detected" and "Carrier lost" messages
+         sent to CALLLOG.SYS.  This presents exact sequence of
+         "detection, login, logout, loss" in the system log file
+         which should allow for better monitoring of dropped
+         carriers without resorting to cryptic symbols. (VAQ)
+88Dec04  Carrier-detect message now handles baudrate. (VAQ)
+88Dec04  Room creation and deletion messages are now reported to
+         CALLLOG.SYS.  This eliminates the need for these messages
+         appearing in Aide>, hence shortly they won't! (VAQ)
+88Dec05  "Sysop command request" and "QuickNet request" logged
+         to CALLLOG.SYS. (VAQ)
+88Dec05  User deletion by remote sysop logged to CALLLOG.SYS. (VAQ)
+88Dec06  Code added to support local (console) use of Door utilities. (VAQ)
+88Dec08  Doorway access code rewritten and streamlined.  The
+         auxiliary program DOOR.EXE is no longer used or needed. (VAQ)
+88Dec10  Windowed-Xmodem support removed from the Networker. (VAQ)
+88Dec11  Code added to support upkeep of ARCHIVE.LOG file in the
+         Citadel "Call Log" directory.  If the sysop wants to
+         maintain ARCHIVE.LOG as an ongoing record of system
+         activity, then the command-line switch "+archlog" should
+         be added to the appropriate line(s) in the batchfile(s)
+         used to control the unattended operation of Citadel.
+         If space or preference is such that the sysop does not
+         want ARCHIVE.LOG to be maintained, then simply leaving
+         the "+archlog" switch out will cause the process to be
+         ignored.  The ARCHIVE.LOG file is updated whenever any
+         function is initiated that deletes the current CALLLOG.SYS
+         file.  The ARCHIVE.LOG file can be read by an Aide while
+         online by executing the ".AQA" command sequence. (VAQ)
+88Dec15  Command-line parameter "+recover" is now needed if the
+         "crash/recovery" message is desired in Aide.  This should
+         not be used during normal Citadel bootup, but only in
+         your batchfile for crash-rebooting. (VAQ)
+88Dec16  Added code to support shell to DSZ.COM for YMODEM/batch
+         and ZMODEM file downloading, including ARChive file
+         support.  Stripped out what is now apparently
+         extraneous YMODEM-related code. (VAQ)
+88Dec17  Added code to support shell to JMODEM.COM for JMODEM
+         file downloading, including ARChive file support. (VAQ)
+88Dec17  1-K XMODEM, ZMODEM, and JMODEM support added for file
+         uploading.  Code is still flakey for incomplete file uploads
+         in that it still reports them to Aide> and the logfile,
+         and writes a partial file to disk.  Will have to look into
+         this.  Also, uploading user's name is now included in the
+         "short file description" that is seen during ".Read Extended"
+         directory scans. (VAQ)
+88Dec17  Adjusted code that administrates the protocolled uploading
+         of room messages (non network) so that the ONLY protocol
+         we will support for this is Xmodem.  It is our intention
+         to completely strip all non-Xmodem code OUT of the Citadel
+         itself and handle it completely via shells.  Xmodem shall
+         remain, mostly because it is solid code, and has stood the
+         test of time.  Also, we will need it for the C86 networker.
+         For non-C86-style netting, we will handle that via Doors. (VAQ)
+88Dec21  Restructured the way that Citadel utilizes the console status bar
+         to display the following information with a user logged in:
+               UserName, Baudrate, Time Logged In,
+               Date, Current Time, [flags], Current Room
+         This is all contained on the single-line status bar by supressing
+         the "Citadel-86 Ver X.yy" message when system is "online" and
+         only displaying that info when system is in idle-mode.  Current
+         room is displayed as user moves through the system, also when
+         current room is affected by Aide functions. (VAQ)
+88Dec23  Rewrote portion of code that handles protocolled reading of
+         messages.  JMODEM and ZMODEM now supported for message downloading.
+         Added code to ARC messages prior to sending them to caller if
+         caller so chooses. (BR, VAQ)
+88Dec24  Ymodem and WXmodem code stripped out of Citadel.  No longer
+         needed. (BR)
+88Dec24  Fixed bug in protocol message server.  User can now download
+         uncompressed message-stream via protocol-selection. (VAQ)
+88Dec27  Added "B" command ["Back-up to..."] in doRegular() to access
+         unGoTo().  It will replace the <U>ngoto command, releasing
+         "U" for "<U>pload File" option. (VAQ)
+88Dec28  Call-log report is now generated when an unlogged caller
+         sends mail to the sysop. (VAQ)
+88Dec29  <D>ownload and <U>pload commands added for file transfer,
+         using default protocol of Xmodem (for now).  Also added
+         ".D" to read directory in a directory room. (VAQ)
+88Dec30  Protocol-drivers "hooked" to the Citadel message-entry
+         routines so that DSZ and JMODEM are now accessible for
+         message-uploading.  Process is completely transparent
+         to the Citadel command-structure, and users can now
+         upload messages using Xmodem, 1-K Xmodem, Jmodem and
+         Zmodem. (VAQ)
+89Jan01  Status bar now reports current value of DL-Time in
+         between calls. (VAQ)
+89Jan02  Nasty bug fixed to prevent system hangs on loss of
+         carrier in certain vulnerable spots. (VAQ)
+89Jan02  ".D" command redefined to duplicate the action of
+         ".O" (Open a Door).  Directory reading functions
+         are now confined to the standard ".R [D or E]"
+         sequence. (VAQ)
+

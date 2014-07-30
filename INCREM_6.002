@@ -1,0 +1,65 @@
+91Oct28  Released V6.01  (VAQ)
+91Oct28  Removed "Re-init Modem" from Sysop Commands.  It is much
+         easier to just press ESC then do a ".TQ" from the console,
+         which resets the modem also.  Resetting the modem via
+         remote is suicidal in any event, and not needed!  (VAQ)
+91Nov01  Added parameter #MODEMIDLE to CTDLCNFG.SYS.  Usage is
+         #MODEMIDLE "string".  Citadel will send "string" to the
+         modem when sysop presses ESC to enter console mode when
+         there is no user online.  This will enable those sysops
+         who own modems that insist on answering the phone with
+         DTR suppressed to send a string to the modem commanding
+         it to not answer incoming calls.  (VAQ)
+91Nov02  Entry of file descriptions prior to uploading now utilizes
+         standard Citadel editor.  (VAQ)
+91Nov05  Added code to allow Citadel to handle the job of answering
+         the line instead of modem "ring counts."  In order to do this,
+         your modem MUST return a NUMERIC value of "2" every time the
+         line rings.  First, in your #modemSetup string, use whatever
+         your modem needs to tell it to return NUMERIC ("nonVerbose")
+         result codes, then (also in #modemSetup) tell it NOT to answer
+         the phone (usually by using the equivalent of the Hayes
+         command "S0=0").  Next, use the command-line parameter
+         "rings=n" for CTDL.EXE in the batchfile that handles your BBS,
+         where "n" is the number of rings you want before the BBS
+         answers the line.  Just ignore all of this stuff if you want
+         Citadel to continue to handle answering the line in
+         the "traditional" manner.  (VAQ)
+91Nov05  Added optional configuration parameter #MODEMANSWER [string]
+         which, if used, will make a record of the string you want to use
+         when you want Citadel to make the modem do the job of answering
+         the line (see previous note).  If missing it defaults to "ATA".
+         Usage:  #MODEMANSWER "string"  with no "\r" or "\n" needed.  (VAQ)
+91Nov08  The daily cumulative activity totals are displayed in a window
+         while the system is waiting for a call.  (VAQ)
+91Nov09  Network information now displays in a scrolling window on
+         the console screen.  Just a fluff, but a nice one.  (VAQ)
+91Nov11  Network nodelist (with indicators for work-pending) is now
+         windowed (via the F3 key) from the console (while waiting
+         between calls).  (VAQ)
+91Nov15  Adjusted code that handles the console status-bar for proper
+         operation when Citadel is first brought up.  Also, tightened
+         all window-oriented code for the networker, net status reports,
+         and pending-events (ALT-A) windows.  (VAQ)
+91Nov18  If you have Citadel set up so that Citadel handles answering the
+         phone (see note for 91NOV05) you will hear a "ring-tone" from your
+         computer speaker when the phoneline is ringing.  This may be
+         defeated by putting the parameter "noringer" on your CTDL.EXE
+         command-line.  (VAQ)
+91Nov21  Added CTDL.EXE parameter "nonoises" for those that want to
+         shut off the ringer AND the "exploding windows" sound-effects.  (VAQ)
+91Nov22  ALT-X to exit to DOS is now in a console window.  It will accept
+         a Y or N but otherwise will burp at you!  (VAQ)
+91Nov29  Beginning with V6.02, all standby-screen displays will use
+         ANSI option, therefore #ANSICONSOLE setting is no longer relevant
+         and will be pulled from CTDLCNFG.SYS with the next revision that
+         "demands" an upgrade of the Configurator (CONFG.EXE).  Meanwhile,
+         you should set #ANSICONSOLE to 1 in order to avoid possible ugliness
+         in case there is some of the older code "lurking about."
+         The release package for V6.02 will contain a "freshly recompiled"
+         version of CONFG.EXE to handle those "just in case" bugs which
+         like to surface here and there.  Note also that beginning with
+         V6.02 you MUST have ANSI.SYS loaded as a device-driver in your
+         DOS CONFIG.SYS file.  (VAQ)
+91Dec01  Network problems with V6.02 (hopefully!) debugged.  (VAQ)
+91Dec07  Released V6.02.  (VAQ)

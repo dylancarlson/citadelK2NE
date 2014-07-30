@@ -1,0 +1,113 @@
+88Oct03  Released Ver 4.01 (AB, VAQ, BR)
+88Oct06  Begin Ver 4.02 (AB, VAQ, BR)
+88Oct06  Minor cosmetic change to display printed during ".AB". (VAQ)
+88Oct09  Added "... [last 20 char in msgBuf.mbtext]" to the
+         <C>ontinue option in the Entry Cmd section.  Retrofitted
+         this modification to Version 4.01 already released. (VAQ)
+88Oct10  Added code to display member-net numbers when net-roster
+         is called using CTRL-L/N/V sequence.  Change "<need to call>"
+         to "Work pending" to shorten line-space.  Retrofitted
+         to Version 4.01 already released. (VAQ)
+88Oct14  "M" command section changed to show ".M" as an error rather
+         than having the extended-command duplicate the "M"
+         command (in case we want it for later). (VAQ)
+88Oct14  "-clock" command-line paramater disabled via #ifdef HUE_STYLE
+         to shorten executable code since most folks want the
+         clock in their stat bars. (VAQ)
+88Oct14  Added CTRL K as "twit" key.  Pressing CTRL K with user online
+         will cause Citadel to act as if user dropped carrier at
+         next available room-prompt.  Acts immediately if user is
+         at a room prompt, otherwise waits for completion of current
+         user activity then dumps him. (VAQ)
+88Oct14  Removed ESC CTRL-L Q sequence for QuickNet.  Replaced with
+         CTRL-Q which triggers QuickNet ONLY while system is IDLE.
+         No longer required to use ESC to go to the 'console mode'
+         in order to trigger the QuickNet function.  Moved the
+         QuickNet function code into AB.C. (VAQ)
+88Oct15  Twit-key will now look for TWITKEY.BLB and print it, if present,
+         to console/modem before pulling DTR - for sysop message to
+         user, simulated line-noise or other nasties. (VAQ)
+88Oct15  Modification [ROOMB.C] installed so that Aide messages which
+         report room editing activities are NOT generated when the
+         room editing occurs at the Console.  Room editing which
+         is done via modem, even as Remote Sysop, is still reported. (VAQ)
+88Oct15  Cleaned up loose-ends in the QuickNet routines. (VAQ)
+88Oct15  ".M" created [Mail Network NodeList] as part of the command
+         sequence in doRegular().  It displays the list of active
+         network nodes (including NETPATH.SYS if it exists). (VAQ)
+88Oct16  Modified ABDOOR.C to create file DORINFO1.DEF when user
+         enters a Door.  This file contains current and previous
+         callers' names in a fashion that is (hopefully) compatible
+         with RBBS and PCBoard Door utilities.  Tested and working
+         (sort of) with CAVE.EXE at Jersey Devil. (VAQ)
+88Oct17  Cleaned up some sloppy Door coding. (VAQ)
+88Oct17  Added CTRL-B option to do logfile backups if the system
+         is idle.  Code is in MODEM.C. (VAQ)
+88Oct18  Removed apparently redundant call to modemInit() in function
+         initCitadel() [ROOMA.C] which speeds up load-time. (VAQ)
+88Oct22  Added CTRL-V to toggle Mail> status (Privacy vs. Visible)
+         at any time while system is idle.  Possibly, we will now
+         remove the +SEEMAIL param. (VAQ)
+88Oct22  Added CTRL-O to show network nodelist while idle. (VAQ)
+88Oct23  Added "doConsoleHelp" which displays FKEYS.BLB when
+         system goes idle between callers, after netting,
+         and after some console control functions.  If FKEYS.BLB
+         is not present, function does nothing. (VAQ)
+88Oct25  Added CTRL-Y to toggle ChatMode on/off at any time.
+         Online user sees nothing.  Message appears on console screen
+         as well as 'C' in status bar if chat is on.  Also, added
+         status of Chat to the ".RS" report. (VAQ)
+88Oct29  Patched ABDOOR.C to create PCBOARD.SYS in the \DOOR
+         subdirectory in a format compatible with PCBoard Doors. (VAQ)
+88Oct29  Corrected bug that corrupted format of DORINFO1.DEF if a
+         user used more than one door per call. (VAQ)
+88Oct29  Added variable to keep track of Door version(s) for
+         Citadel-86 development purposes. (VAQ)
+88Oct30  Modified ABDOOR.C for folks that use one-word handles.
+         Instead of appending "\nLogged-in" to their handle, we now
+         append "\n" and repeat their handle as their surname.  This
+         is only passed to Door applications via DORINFO1.DEF and
+         PCBOARD.SYS and is not used by Citadel itself. (VAQ)
+88Nov01  Add code to require console keypress after reading the
+         net roster via CTRL O (neat fluff!).  It is my avowed
+         intention that we will NOT treat the sysop as a
+         "second class citizen."  (VAQ)
+88Nov02  Add code for function keys (F1, F2, F3) for log backup,
+         QuickNet, and reading the net node list/status while
+         the system is idle. (VAQ)
+88Nov05  Remove duplicate CTRL-key code for idle-mode functions
+         now supported by F1, F2, and F3. (VAQ)
+88Nov06  Added code for function key (F4) to directly access all
+         network "administrative" commands contained in the
+         function "netStuff()" directly from the console via
+         single keystroke.  Also added code to display the
+         file NETKEYS.BLB if it exists.  Code re-inits the
+         modem after execution in case dialing was used. (VAQ)
+88Nov07  Added code for <ALT X> to return to MS-DOS directly
+         whenever the system is idle.  Creates CTDLTABL.SYS
+         on the way to DOS and sets SYSOP_EXIT flag. (VAQ)
+88Nov08  Added code to support "?" at idle mode to display
+         the FKEYS.BLB file/menu.  Also, if returning to
+         'modem' mode from CTRL-L sysop-menu, FKEYS.BLB
+         will now be displayed (if it exists and if no
+         carrier is present). (VAQ)
+88Nov10  Corrected some code in the original netStuff() function
+         that made it possible for a remote sysop to cause
+         some really pathological happenings.  System now
+         checks for carrier during these "sensitive" spots
+         and if it finds one, refuses to execute the code
+         involved and just bounces the remote sysop back to
+         the 'Net fn:' prompt. (VAQ)
+88Nov12  Added F6 to enable the sysop to delete a user from
+         the "Idle-mode" with a minimum of fuss and bother.
+         Also added F7 to go directly to the Sysop command-set
+         from the Idle-mode menu.  New menu file to support
+         the F7 operation is called OPERATOR.BLB and displays
+         only when the sysop command-set is invoked from
+         the idle mode. (VAQ)
+88Nov14  Version 4.02 released. (AB, VAQ, BR)
+
+
+
+
+

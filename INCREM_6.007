@@ -1,0 +1,34 @@
+93Apr18  Version 6.06 released.  (VAQ, SMW, MAB)
+93Apr18  Added "<D>elete/move" option on prompt which appears after each
+         message while reading a room (assuming account is so configured).
+         Option is ONLY available (and only appears) if the logged-in
+         user is the Sysop, an Aide or the Room Moderator.  (VAQ, SMW)
+93Apr19  Added <F>inger utility to the network> level command-set.  (VAQ, SMW)
+93Apr19  Added "NETWORK.MNU" to show Network> options when user presses "?"
+         at the network> prompt while in SubSystem Access.  (VAQ, SMW)
+93Apr24  Added "<S>top [N]ext" prompt while in Mail>.  (VAQ, SMW)
+93Apr25  Citadel will now display the file "REGISTER.BLB" to a new user
+         just prior to requesting User Registration Information.  This
+         file is NOT REQUIRED and if not present, Citadel will just chug
+         right along, however if you want to "warn" your new user that
+         he is going to have to provide his address and phone number, this
+         is the place to do it - also you can tell your new user that the
+         information to be provided can be flagged as PRIVATE and then
+         viewable only by the Sysop.  (VAQ, SMW)
+93Apr25  Repaired minor bug in telnet code which would sometimes "trash"
+         a long-distance CitaNet session.  (VAQ, SMW)
+93Apr26  At startup, Citadel will now read a file called HOSTNAME.SYS
+         if it is present.  HOSTNAME.SYS must contain one line only,
+         with NO carriage-return at the end of the line.  The file should
+         contain your REGISTERED DOMAIN NAME for those of you who are
+         "UUCP or Internet-connected."  This is a completely optional
+         facility for this version as we build toward the future!  (VAQ, SMW)
+93May12  Version 6.07 released.  (VAQ, SMW, MAB)
+
+
+
+
+
+
+
+

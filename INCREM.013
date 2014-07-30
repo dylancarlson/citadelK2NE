@@ -1,0 +1,20 @@
+90Jul15  Released V5.12; also, .R# removed.  (VAQ)
+90Sep02  Message numbers removed except for Aides and those with
+         Verbose headers switched on.  (VAQ)
+90Sep21  ".rm" command modified to accept parameters:
+             .rms (read message - single)
+             .rmf (read messages - forward starting at:)
+             .rmr (read messages - reverse starting at:)
+         This allows a user to pick a starting point in a room and
+         read forward or reverse from that message, or read that
+         message individually.  Not available in Mail>.  (VAQ)
+90Sep22  Massive "code-tightening" on the ".rm" command sequence
+         along with curing a couple of minor bugs.  (VAQ)
+90Sep23  Everybody sees message numbers now (again!).  (VAQ)
+90Sep28  Modified NETLOG.SYS coding so that the link-layer
+         buffer report will only appear in the net log if there
+         are characters to report.  (VAQ)
+90Oct09  Released V5.13b to the SNJ nodes for beta testing.  After
+         all, nothing like a bunch of online users to really take
+		 this thing for a shakedown cruise!  (VAQ)
+90Oct24  Released V5.13.  (VAQ)

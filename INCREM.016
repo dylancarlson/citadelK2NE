@@ -1,0 +1,85 @@
+91Jan12  Version 5.15 released.  (VAQ)
+91Jan12  Code added to support operation of a Citadel node as a
+         FIDOnet "gateway" node.  In such cases, rooms that are
+         edited to be "gateway" rooms must also be Citadel-net
+         "shared" rooms as well as FIDOnet "external-net linked"
+         rooms.  Once this has been done, you can now set such
+         a room to act as a "gateway" using "<A>ide-edit room <G>ateway"
+         which will cause messages received into that room from
+         other Citadel nodes to be exported to the linked FIDOnet
+         conference attached to that room.  Yes, this all sounds
+         confusing as hell!  Also, CITAGATE has been modified to
+         support this feature, and you must have CITAGATE ver 1.03
+         (or newer) to use your Citadel system as a FIDOnet Gateway.
+         There are also things you must negotiate with the FIDOnet
+         coordinator(s) before activating yourself as a Gateway
+         (they are much more structured than Citadel Net -- politics!).  (VAQ)
+91Jan13  Code added to enable granting/removing user privileges
+         for posting on external-linked nets.  Interrogation for
+         "linked net privs" takes place during the "CTRL-L V"
+         user-validation sequence.  On systems running open login,
+         user privileges for external-linked nets will default to the
+         same setting as that for the Citadel net.  If you are set up
+         (in CTDLCNFG.SYS) to automatically grant Citadel-net privs
+         to a new caller then the new caller will ALSO default to
+         automatically receive linked-net privs.  (VAQ)
+91Jan14  Added "<G>ateway rooms" as a sub-option to the ".<K>nown
+         rooms" command-set.  (VAQ)
+91Jan14  Partial-name searches added to <CTRL L> <U>ser-profile and
+         <CTRL L> <V>alidate-user commands.  (VAQ)
+91Jan18  Enabled ".V" [.View Contents of Packed file (filenames only)]
+         which causes Citadel to display the contents of user-specified
+         packed file (ZIP, ARC, etc.) showing ONLY the filenames of the
+         member files.  The <V> command continues to work as in
+         prior versions.  (VAQ)
+91Jan20  Net nodes can now be flagged as using "front-end" software
+         other than Citadel itself.  Sequence is <CTRL L> then N
+         then E (edit node) and then choose option F.  You will then
+         be prompted as to whether the node uses "front-end" software
+         other than Citadel.  Answering with Y will tell your Citadel
+         to add delays when calling that node to allow time for the
+         "front end" (such as BinkleyTerm, FrontDoor, etc.) to pass
+         control to Citadel for the network session.  If you answer
+         N, this will tell your Citadel that the node in question does
+         not use a "front end" and will make call-stabilization occur
+         much more quickly.  If you answer Y "by mistake" this will NOT
+         prevent a normal Citadel-net session from happening.  It will
+         only add approximately 5 seconds to the time needed to stabilize
+         the call after carrier is detected.  (VAQ)
+91Jan20  Added crude dial-out terminal mode via <CTRL L> then D.  Function
+		 queries console user for number to dial and number of attempts
+         and then drops to "interactive mode" with modem echo flags
+         properly set.  Does not currently support anything other than
+         dumb-terminal operation.  File-transfer facilities to follow.
+         With "not too much work" this may evolve into something.  (VAQ)
+91Jan21  Added capability to "shell" to DOS from within chat-mode or
+         while using the "dumb terminal" out-dial system (see previous
+         note).  Shell to DOS is by CTRL D from console keyboard.  Modem
+         is completely ignored inside the shell, making it completely
+         secure from user intrusion.  This permits the use of protocol
+         drivers (such as DSZ) to handle file-transfers from within
+         the dial-out terminal (which is not so "dumb" at this point).  (VAQ)
+91Jan31  Began CITANET.EXE which, when finalized, will be a "stand-alone"
+         Citadel Networker utility which will be callable "on its own"
+         from "front-end" software such as BinkleyTerm and FrontDoor.  (VAQ)
+91Feb04  First successful net session using CITANET.EXE -- called from the
+         BinkleyTerm batch file by an incoming Citadel net call.  (VAQ)
+91Feb08  Cosmetic modification to the Goto command - will now show
+         ".goto room: " on a ".g" and will put room-name in quotes
+         on an ordinary "g" command.  Pure fluff from Citadel/UX.
+         Similar modifications made for <B>ackup commands.  (VAQ)
+91Feb11  Citadel will now keep track of the last date on which a user
+         has called the system, and will display this to the user at
+         login.  This depends on the existence of LOGDATES.SYS in the
+         Citadel "home area" directory.  A utility (GENDATES.EXE) has
+         been created for the purpose of creating this file.  If the
+         file is missing then Citadel just keeps right on going as
+         usual.  (VAQ)
+91Feb12  Citadel will now keep track of the number of times each user
+         has called the system and will display this to the user at
+         login.  This depends on the existence of LOGCALLS.SYS for its
+         functionality.  GENDATES.EXE has been modified to automatically
+         create, and correctly "seed" LOGCALLS.SYS.  If LOGCALLS.SYS is
+         missing (or for any other reason inaccessible) then Citadel
+         will just keep chugging.  (VAQ)
+91Feb16  Version 5.16 released.  (VAQ)

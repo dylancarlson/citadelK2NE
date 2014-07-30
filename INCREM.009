@@ -1,0 +1,157 @@
+90Jan25  Modification of LOCK parameter to allow caller the chance to
+         try his password a second time in the event of a typo - Citadel
+         will return to the "Login:" prompt if user answers "n" to the
+         "Do you want to apply for an account" question, but only once!  (VAQ)
+90Feb03  Modification of status line so that Aide user's name is preceeded
+         by an asterisk (*) while logged in.  (VAQ)
+90Feb03  Minor adjustment to "front-end aware" section of code to properly
+         handle user login when SECURE or LOCK parameters are set and Citadel
+         is passed control from a "front-end-mailer."  (VAQ)
+90Feb04  ANSI color C-code for users and console screen, written by Alan Bowen
+         and patched to main code.  (VAQ)
+90Feb05  "+fast" parameter changed to "+slow".  FAST handling of modem
+         initialization is now the DEFAULT CASE.  If your modem cannot
+         handle high-speed init strings, then use +SLOW to do the
+         obvious!  (VAQ)
+90Feb05  ANSI colors added as user-config option.  These are tied to the
+         user-settable ".ECG" command.  ANSI.SYS is now REQUIRED as a device
+         driver, and must appear in your CONFIG.SYS file at bootup.  Consult
+         your DOS manual for information on how to do this.  (VAQ)
+90Feb05  Parameter "+archlog" no longer supported and the system will now
+         maintain ARCHIVE.LOG as the default state.  If you don't want to
+         maintain an archive-log, you can simply delete the file ARCHIVE.LOG
+         which appears in your log-area, either manually or via batch-file
+         automatic maintenance.  (VAQ)
+90Feb05  Parameter "ansi" added.  Use this if you have a COLOR monitor
+         and if you want ANSI colors displayed on your monitor.  This setting
+         will PRE-EMPT the values in your parameter "COLOR=xx,yy", at least
+         for this release.  If you use the "ansi" parameter, you should
+         discontinue use of "COLOR=xx,yy" as the results are totally
+         unpredictable and downright ugly!  (VAQ)
+90Feb05  Parameter "+fast" changed to "+slow".  The DEFAULT is to support
+         modems that can receive and "digest" command strings at full speed
+         from the computer.  If a modem is found not to be able to do this
+         reliably, the use of "+slow" in the CTDL.EXE command-line will
+         slow down transmission to the modem during "initialization" by a
+         factor of approximately 10.  (VAQ)
+90Feb09  Param "coltb=a,b,c,d" added to control ANSI color assignment.
+         The assignment levels are (roughly) as follows:
+             a: message texts, system announcements and major (non-room)
+                prompts particularly for nonexpert users, one of the
+                introductory (optional logtext.00#) files
+             b: the console standby screen (FKEYS.BLB), mail> notification
+                at login, display of rooms with new messages, expanded
+                descriptions in file directories, message headers, most
+                of the help files, room prompts for mail> and aide>,
+                known hidden rooms.
+             c: HELPOPT.HLP when called by ".h?", terse file directory
+                listings, all room prompts except for mail> and aide>,
+                list of known directory rooms (.kd), nodes on the net (.m),
+                known public rooms, rooms with no new messages.
+             d: Known zapped/forgotten rooms.
+         The letters (a, b, c, and d) should be replaced with SINGLE DIGIT
+         numbers in accordance with the following color-code assignment:
+           0=BLACK     1=RED        2=GREEN    3=BROWN
+           4=BLUE      5=MAGENTA    6=CYAN     7=WHITE
+         These are the ONLY permissable values for this parameter.
+         A typical example use of the parameter might be "coltb=2,1,4,5",
+         which is, incidentally, the DEFAULT setting if you leave this
+         parameter out.  This parameter controls the colors you, as well
+         as the modem user, will see (provided you use the "ansi" param
+         to activate ANSI color for your console and provided, obviously,
+         that the caller has set his ANSI flag ON using the ".ECG" command
+         in his user configuration).  (VAQ)
+90Feb11  Added additional (5th) color-level to "coltb=" to handle color
+         setting for standby screen display (FKEYS.BLB) if present.
+         The setting of this variable (digit 0 thru 7) uses the
+         8 "dim" or "alternate" color codes.  Experiment here to find
+         something that looks good on your monitor!  (VAQ)
+90Feb12  Parameter "short=xxx" added.  "xxx" is any integer value (1 to
+         three digits) in MINUTES.  This will automatically terminate
+         a logged-in session after the desired time-limit has expired.
+         Timer starts at login and boots the caller after "xxx" minutes
+         have passed, with a warning being sent to the caller when five
+         minutes remain in the current session.  Also, time remaining
+         for the call in progress is displayed to the caller as part of
+         the ".rs" command.  Caller is advised at login if a time limit
+         is active.  If param is not used, no limit is active.  (VAQ)
+<><><><><><><><> Release of V5.08 at this point [90Feb17] <><><><><><><><><>
+90Feb18  Citadel now reports running total of modem-user logins, messages
+         posted, network sessions, and number of node-connects successfully
+         stabilized (incoming and outgoing).  As the BBS runs, this data
+         is periodically written to a file called SYSDATA.USR which will
+         be in the Citadel "homeArea" directory (where CTDL.EXE and
+         CTDLCNFG.SYS are found).  These counters are also displayed while
+         the system is waiting for a call.  If SYSDATA.USR is not present
+         when Citadel is started, then it automatically will reset all the
+         running totals to zero and start the file for you.  This is
+         written to reflect DAILY TOTALS and NOT a "life of the system"
+         count.  Thus, for it to make sense to your users you should
+         DELETE THIS FILE DAILY, preferrably by use of a #event keyed
+         to your main bbs batch file to run at midnight.  Or, see
+         the next note concerning CTDLSTAT.EXE.  (VAQ)
+90Feb19  CTDLSTAT.EXE written and debugged.  This file digests the data
+         contained in SYSDATA.USR and outputs the information in a "human
+         readable" form as REPORTER.OUT.  When it is finished, it deletes
+         SYSDATA.USR for you so that Citadel can restart the totals.
+         All of this automagically happens in the homeArea directory.
+         If you are running an "out of the box" Citadel:K2NE, then
+         CTDLSTAT.EXE goes in your "C:\K2NE" directory, otherwise, put it
+         in the directory containing CTDL.EXE and CTDLCNFG.SYS.  (VAQ)
+90Feb20  Call-log entry for login of a modem caller will now show the
+         caller number (from SYSDATA.USR's running total - see earlier
+         notes on how this file can be handled for daily counts and other
+         miscellany).  (VAQ)
+90Feb20  Code added to track number of outbound network messages sent to
+         other nodes (does not include net mail> messages).  Corresponding
+         changes added to CTDLSTAT.EXE also.  (VAQ)
+90Feb21  Code added to include current-cycle net session number in the
+         net log.  Also, adjusted message counter to include net-forwarded
+         mail in the net-message total.  Modified output of CTDLSTAT.EXE
+         ("reporter.out") to conform with these adjustments.  (VAQ)
+90Feb21  Alternate standby-screen handling for "ansi" parameter added.
+         Minor changes in the function-key code (MODEM.C) were patched
+         to handle this.  Folks not using ANSI for the local console should
+         notice a minimum of change.  ANSI consoles now will display the
+         FKEYS.BLB console menu ONLY on pressing "?".  (VAQ)
+90Feb23  If the LOCK parameter is not used and if LOGINOK=0, and if
+         a caller tries to login as a new user, then Citadel will now
+         type out the file APPLY.BLB to the prospective user and then
+         drop the new user into the "mail to the sysop" routines.
+         After the mail message is completed, Citadel will then guide
+         the prospective user through setting up his config options,
+         name and password, and will then log him off.  The prospective
+         account is then saved to the system BUT is flagged as an
+         "un-validated user."  A list of unvalidated users can be
+         summoned by an Aide using the new command ".aide: query
+         validation pending" (.aqv).  If an aide knows the System
+         Password (assuming that the system password has been enabled)
+         then the unvalidated user(s) can be validated from the
+         Sysop command area using "V" and then answering the
+         resulting prompt accordingly (CTRL L, then V, and so forth).
+         If an unvalidated user calls back before the account has been
+         validated, he will be so informed (optional file NOTYET.BLB
+         will be shown if present) and then logged out.  (VAQ)
+90Feb25  All statistical counters managed by SYSDATA.USR are now checked
+         against current DAY OF MONTH whenever a carrier is detected,
+         whenever Citadel is brought UP or DOWN, and whenever the system
+         exits (Doors, BinkleyTerm if used, etc.).  If the current DAY
+         OF MONTH is different than the one stored in SYSDATA.USR, then
+         SYSDATA.USR is copied out to SYSDATA.BAK and all the counters
+         are re-set.  You are left to your own inventiveness for handling
+         CTDLSTAT.EXE around the change-of-date for making daily reports
+         (if you are into that sort of thing).  I recommend that if you
+         are going to do that, do it shortly BEFORE midnight and have
+         CTDLSTAT process SYSDATA.USR (or a renamed copy of it).  You can
+         force the counters to reset by deleting SYSDATA.USR after you
+         are done processing it (which may or may not result in flakiness
+         later - play with it!) but I don't recommend that approach.  Let
+         Citadel handle it - if the bugs aren't too thick, it just
+         might work!  (VAQ)
+90Feb27  Command "<L>ast 5 msgs" added to type-out last five messages in
+         current room to logged in user.  Adjusted MAINOPT.MNU and added
+         UNLOGOPT.MNU to reflect changes in the command "L" depending on
+         login status of online user.  (VAQ)
+90Feb28  Adjusted window code in ANSI console screen during idle-time
+         to restore screen faster after pressing "?" to see FKEYS.BLB.  (VAQ)
+<><><><><><><><> Version 5.09 released at this point <><><><><><><><>

@@ -1,0 +1,108 @@
+89Oct26  Removed "linkprivs" as a command-line option since it is now
+         totally un-needed in light of "nodoors" and other door flag
+         enhancements - see revisions for 89Oct24/25/26 contained
+         in INCREM.006 file.  (VAQ)
+89Oct26  "+netdebug" parameter support removed from public executable
+         code version.  (VAQ)
+89Oct26  Added "Pause" after messages as user configuration option,
+         and ".ECP" command to support it via a flag-bit set in the
+         user's account record (defaults to OFF for new users).  (VAQ)
+89Oct27  Added code to support verbose message headers as per user
+         configuration in ctdllog.sys - added configuration dialogue
+         for user to set this in his account.  Defaults to short
+         message headers for new users.  (VAQ)
+<><><><><><><> Code Released as Version 5.04 at this point. <><><><><><>
+>>>>> Version 5.05 modifications start here <<<<<
+89Nov04  Citadel will now pass user's ANSI status to PCBOARD.SYS file
+         which is generated whenever a user goes to a Door.  At this
+         time, little point is seen in passing this flag to DORINFO#.DEF
+         since the user can set his ANSI level via MONITOR, which will
+         "remember" it for each user.  (VAQ)
+89Nov04  Code added to handle certain modems which chop off banners
+         at login when caller is not at 2400bps.  Solves the problem
+         of the Everex 2400bps internal modem.  (VAQ)
+<><><><><><><> Code Released as Version 5.05 at this point. <><><><><><>
+>>>>> Version 5.06 modifications start here <<<<<
+89Nov07  Added command-line param "noaq" to disable the ".AQx" command
+         sequences for those sysops who don't want prying eyes of their
+         Aides into caller and network log files.  Aide at sysConsole
+         can still use those commands!  (VAQ)
+89Nov08  Added code that will (hopefully!) permit Citadel to be run
+         as a "door".  Theoretically, this should permit someone
+         running RBBS or some other system to run a Citadel BBS as an
+         application program ("door-ware").  Since this necessitates
+         special treatment of the modem at logon and logoff, we have
+         to "tell" Citadel that it is a "door" when we boot it.  To
+         do this, use the command-line parameter "asdoor" when calling
+         Citadel in the batch file controlling it when run as a door.
+         Citadel will try to type the file "citdoor.blb" to the user
+		 when it first comes up "as a door", so if there is something
+		 special you want to tell the user at this point, put it in
+		 that file.  When the user logs out of the "doorCit", it will
+		 exit with errorlevel = 0.  (VAQ)
+89Nov12  Code added to support new mode of login.  For lack of better
+         terms, call it "Secure".  When parameter LOCK is used in
+         conjunction with CTDL.EXE, the system will type out the usual
+         introductory stuff and immediately bring the caller to the
+         login area.  If the caller is new (just presses ENTER for
+         a password) then he is immediately brought to "enter mail
+         to the sysop" without going through the motions of
+         getting to the mail> room.  System disconnects on
+         message-save or abort.  Bad password tries are immediately
+         disconnected.
+         >>>> WARNING!!! <<<<
+         >>>> This is not yet working to my satisfaction.
+         >>>> USE AT YOUR OWN RISK!!!!!  It will be completely debugged
+         >>>> in a future release.  (VAQ)
+89Nov15  Added code to permit Citadel to run under a "front end" program
+         such as BinkleyTerm.  In this case, Citadel networking cannot
+         as of now be supported.  There may also be other niggling problems
+         that remain to be tested.  To run Citadel with BinkleyTerm
+         or similar front-end-mailers, use BINK as a parameter when
+         running CTDL.EXE.  (VAQ)
+89Nov23  Added code to support ".Aide Query Remote-FIDOnet-Log" (.AQR) and
+         ".Aide Query Local-FIDOnet-Log" commands.  If you are running FIDO
+         or RBBS net software as a Door, you may opt to have your console
+         logfile copied to your SYS area and rename it to FIDOCONS.LOG.
+         Similarly, copy your modem logfile to the same area and rename it to
+         FIDOCOM1.LOG (the "COM1" part of the filename has absolutely nothing
+         to do with the COMport you are using - I just needed a name!).  This
+         should be done as part of your FIDO or RBBSnet door batchfiles since
+         Citadel is oblivious to that stuff and will only type the files to
+         the logged in user if they are where Citadel expects them to be, and
+         if they are named correctly.  (VAQ)
+89Nov24  Tightened code supporting several of the ".A" commands.  (VAQ)
+89Nov24  Parameters COLOR= and STATUS= are no longer supported.  In their
+         place, use COLOR=xx,yy where xx is the Screen/Background color
+         desired, and yy is the StatusLine color desired.  For example,
+         if you have been using "COLOR=66" and "STATUS=31" in your BBS
+         batchfile when calling CTDL.EXE, you will now use "COLOR=66,31".
+         No spaces and (obviously, I hope) no quotes.  The reason for
+         this change was to eliminate one possible command line parameter
+         by combining two related parameters.  Experimentation with the
+         color/digit codes is in order here to find what appeals to
+         you, and what looks best on your monitor, since not all display
+         cards and monitors are created equally!  (VAQ)
+89Nov25  Added code to read FIDOnet remote and local backup logs.  Using
+         ".AQBR" and ".AQBL", Citadel will type out FIDOCOM1.BAK and
+         FIDOCONS.BAK respectively.  It is left to the Sysop to cause these
+         files to be generated on a daily/weekly/monthly basis, as desired,
+         and placed in the same directory as the FIDOCOM1.LOG and FIDOCONS.LOG
+         files.  This can easily be handled by the BINKLEY.BAT and
+         BINKLEY.EVT files which most folks accessing FIDOnet or RBBSnet
+         will be using anyway.  (VAQ)
+89Nov27  Added ability to send message to an online user.  This is invoked
+         via function key F10.  Message is contained in file CHATCALL.BLB
+         and may, of course, say anything the sysop desires.  If file is not
+         present, default message is "The Sysop requests a chat."  (VAQ)
+89Dec02  Cleaned up some minor code in the interface handling Citadel
+         and BinkleyTerm.  (VAQ)
+89Dec10  Modified code used to read the table-of-contents ("TOC") of
+         archived files so that the ".RC" command will now handle files
+         of type LZH, ARC, PAK and ZIP.  Beginning with distribution of
+         this version (5.06), sysops MUST use the new "TOC_READ.COM"
+         utility which accompanies this release.  It must be in the same
+         directory where "IFL.COM" formerly resided.  In keeping with this
+         change, the command sequence ".RHD", which formerly handled the
+         special case of LZH file content reading, is gone.  (VAQ)
+
